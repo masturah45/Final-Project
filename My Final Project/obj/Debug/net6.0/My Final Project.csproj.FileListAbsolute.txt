@@ -1,0 +1,34 @@
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\appsettings.json
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\My Final Project.staticwebassets.runtime.json
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\My Final Project.exe
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\My Final Project.deps.json
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\My Final Project.runtimeconfig.json
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\My Final Project.dll
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\My Final Project.pdb
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\Humanizer.dll
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\MySqlConnector.dll
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.csproj.AssemblyReference.cache
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.AssemblyInfoInputs.cache
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.AssemblyInfo.cs
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.csproj.CoreCompileInputs.cache
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.RazorAssemblyInfo.cache
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.RazorAssemblyInfo.cs
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\scopedcss\bundle\My Final Project.styles.css
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\scopedcss\projectbundle\My Final Project.bundle.scp.css
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.csproj.CopyComplete
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.dll
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\refint\My Final Project.dll
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.pdb
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\My Final Project.genruntimeconfig.cache
+C:\Users\ADESANYA\source\repos\Final Project\My Final Project\obj\Debug\net6.0\ref\My Final Project.dll
