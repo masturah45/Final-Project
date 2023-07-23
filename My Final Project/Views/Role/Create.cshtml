@@ -1,0 +1,22 @@
+﻿@model My_Final_Project.Models.DTOs.CreateRoleRequestModel
+@{
+    ViewData["Title"] = "Create Role";
+
+    <section>
+            <form asp-action="Create" method="post" class="rol" enctype="multipart/form-data">
+                <div class="rol-input">
+                    <div class="in">
+                        <input type="text" name="Name" id="Name" placeholder="Role Name">
+                    </div>
+                <div class=" rol-input">
+                    <div class="in">
+                        <input type="text" name="Description" placeholder="Description">
+                    </div>
+                </div>
+
+                <div>
+                    <input type="submit" value="Create" asp-controller="Role" id="form-submit">
+                </div>
+            </form>
+    </section>
+}

@@ -1,0 +1,43 @@
+﻿@using My_Final_Project.Models.Enum
+@model My_Final_Project.Models.DTOs.UpdateTherapistRequestModel
+<h5>Update Therapist</h5>
+
+<div asp-controller="Therapist" asp-action="Update" style="font-size: 130%;">
+
+    <form asp-action="Update">
+
+        <fieldset>
+
+            <div class="inputs">
+
+                <div style="margin-bottom:auto">
+                    <div><label for="floatingInput">FirstName</label></div>
+                    <input type="text" placeholder="Enter your FirstName" name="FirstName">
+                </div>
+
+                <div style="margin-bottom:auto">
+                    <div><label for="floatingInput">LastName</label></div>
+                    <input type="text" placeholder="Enter your LastName" name="LastName"/>
+                </div>
+
+                <div style="margin-bottom:auto">
+                    <div><label for="floatingInput">PhoneNumber</label></div>
+                    <input type="text" placeholder="Enter your PhoneNumber" name="PhoneNumber"/>
+                </div>
+
+                <div style="margin-bottom:auto">
+                    <div><label for="floatingInput">Email</label></div>
+                    <input type="email" placeholder="Enter your Email" name="Email"/>
+                </div>
+
+                <div style="margin-bottom:auto">
+                    <div><label for="floatingInput">Password</label></div>
+                    <input type="password" placeholder="Enter your Password" name="Password"/>
+                </div>
+            </div>
+
+        </fieldset>
+
+    </form>
+
+</div>

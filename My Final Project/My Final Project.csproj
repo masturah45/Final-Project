@@ -17,8 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Interfaces\IRepositories\NewFolder\" />
-	  <Folder Include="NewFolder\" />
+	  <Folder Include="Views\SuperAdmin\" />
 	</ItemGroup>
 
   </Project>

@@ -11,7 +11,7 @@ using My_Final_Project.ApplicationContext;
 namespace My_Final_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230709135247_super")]
+    [Migration("20230723004109_super")]
     partial class super
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,34 +80,6 @@ namespace My_Final_Project.Migrations
                     b.ToTable("Appointments");
                 });
 
-            modelBuilder.Entity("My_Final_Project.Models.Entities.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("My_Final_Project.Models.Entities.Client", b =>
                 {
                     b.Property<Guid>("Id")
@@ -115,6 +87,10 @@ namespace My_Final_Project.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -151,37 +127,6 @@ namespace My_Final_Project.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("My_Final_Project.Models.Entities.ReviewTable", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("AppointmentId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Ratings")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Review")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ReviewTables");
-                });
-
             modelBuilder.Entity("My_Final_Project.Models.Entities.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -205,12 +150,7 @@ namespace My_Final_Project.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Roles");
                 });
@@ -255,33 +195,17 @@ namespace My_Final_Project.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("AccountNumber")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<double>("AmountByHour")
-                        .HasColumnType("double");
-
-                    b.Property<string>("BankName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
@@ -349,10 +273,6 @@ namespace My_Final_Project.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -426,17 +346,6 @@ namespace My_Final_Project.Migrations
                     b.HasOne("My_Final_Project.Models.Entities.User", "User")
                         .WithOne("Client")
                         .HasForeignKey("My_Final_Project.Models.Entities.Client", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("My_Final_Project.Models.Entities.Role", b =>
-                {
-                    b.HasOne("My_Final_Project.Models.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

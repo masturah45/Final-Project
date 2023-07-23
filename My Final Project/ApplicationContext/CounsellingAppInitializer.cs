@@ -3,9 +3,9 @@ using My_Final_Project.Models.Entities;
 
 namespace My_Final_Project.ApplicationContext;
 
-public class CounsellingAppInitializer
+public static class CounsellingAppInitializer
 {
-    public static async Task Seed (IApplicationBuilder applicationBuilder)
+    public static async Task Seed ( this IApplicationBuilder applicationBuilder)
     {
         var role = new Role
         {
@@ -29,7 +29,6 @@ public class CounsellingAppInitializer
             DateUpdated = DateTime.Now,
             Gender = Models.Enum.Gender.Female,
             //SuperAdmin = superAdmin,
-            UserName = "superAdmin",
             //UserRoles = userRole,
         };
 
@@ -61,14 +60,17 @@ public class CounsellingAppInitializer
 
        user.SuperAdmin = superAdmin;
 
-        using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+        using(var serviceScope = applicationBuilder.ApplicationServices.CreateAsyncScope())
         {
             var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
             await context.Database.MigrateAsync();
             if(!context.Roles.Any())
             {
-                context.Users.AddAsync(user);
-                context.SaveChangesAsync();
+                await context.Roles.AddAsync(role);
+                await context.Users.AddAsync(user);
+                await context.UserRoles.AddRangeAsync(userRole);
+                await context.SuperAdmins.AddRangeAsync(superAdmin);
+                await context.SaveChangesAsync();
             }
         }
 

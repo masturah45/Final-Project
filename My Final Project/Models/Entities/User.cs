@@ -8,7 +8,6 @@ namespace My_Final_Project.Models.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
-        public string UserName { get; set; }
         public SuperAdmin SuperAdmin { get; set; }
         public Therapist Therapist { get; set; }
         public Client Client { get; set; }

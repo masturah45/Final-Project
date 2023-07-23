@@ -1,0 +1,43 @@
+﻿@using My_Final_Project.Models.Enum
+@model My_Final_Project.Models.DTOs.CreateTherapistRequestModel
+@{
+    ViewData["Title"] = "Therapist Registration";
+}
+
+<h5>REGISTRATION</h5>
+
+<fieldset>
+    <form asp-action="Create" method="post" class="forms" enctype="multipart/form-data">
+        <div class="input">
+            <div style="margin-bottom:auto">
+                <label for="FirstName">FirstName</label><br>
+                <input type="text" placeholder="Enter your FirstName" name="FirstName" id="trans">
+            </div>
+
+            <div style="margin-bottom:auto">
+                <label for="LastName">LastName</label><br />
+                <input type="text" placeholder="Enter your LastName" name="LastName" id="trans"/>
+            </div>
+
+            <div style="margin-bottom:2%">
+                <label for="PhoneNumber">PhoneNumber</label><br />
+                <input  type="number" placeholder="Enter your PhoneNumber" name="PhoneNumber" id="trans"/>
+            </div>
+
+            <div style="margin-bottom:auto">
+                <label for="Email">Email</label><br />
+                <input type="email" placeholder="Enter your verified email" name="Email" id="trans"/>
+            </div>
+
+            <div style="margin-bottom:auto">
+                <label for="Password">Password</label><br />
+                <input type="password" placeholder="Enter your Password" name="Password" id="trans"/>
+            </div>
+
+            <div style="margin-bottom:2%">
+                <input type="submit" value="Register" id="form-submit">
+            </div>
+        </div>
+
+    </form>
+</fieldset>

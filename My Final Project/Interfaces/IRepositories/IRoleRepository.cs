@@ -8,6 +8,7 @@ namespace My_Final_Project.Interfaces.IRepositories
         Task<Role> GetRole(Guid id);
         Task<Role> GetRole(Expression<Func<Role, bool>> expression);
         Task <IEnumerable<Role>> GetAllRoles();
+        Task<Role> GetRoleByName(string name);
 
     }
 }
