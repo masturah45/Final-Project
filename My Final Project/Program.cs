@@ -1,10 +1,15 @@
+using Hangfire;
+using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using My_Final_Project.ApplicationContext;
+using My_Final_Project.FileManager;
+using My_Final_Project.FileManagers;
 using My_Final_Project.Implementations.Repositories;
 using My_Final_Project.Implementations.Services;
 using My_Final_Project.Interfaces.IRepositories;
 using My_Final_Project.Interfaces.IService;
+using My_Final_Project.Models.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +31,22 @@ builder.Services.AddScoped<IClientService, ClientService>();
 
 builder.Services.AddScoped<ITherapistRepository, TherapistRepository>();
 builder.Services.AddScoped<ITherapistService, TherapistService>();
+
+builder.Services.AddScoped<IIssuesRepository, IssuesRepository>();
+builder.Services.AddScoped<IIssuesService, IssuesService>();
+
+builder.Services.AddScoped<ITherapistIssuesRepository, TherapistIssuesRepository>();
+builder.Services.AddScoped<ITherapistIssuesService, TherapistIssuesService>();
+
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+
+builder.Services.AddScoped<IChatRepository, ChatRepository>();
+builder.Services.AddScoped<IChatService, ChatService>();
+
+builder.Services.AddScoped<IFileManager, FileManager>();
+builder.Services.AddScoped<INotificationMessage, NotificationMessage>();
+builder.Services.AddOptions<WhatsappMessageSettings>().BindConfiguration(nameof(WhatsappMessageSettings));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 .AddCookie(config => {
@@ -34,6 +55,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     config.Cookie.Name = "MyFinalProject";
 });
 
+builder.Services.AddHangfire(config =>
+config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+.UseSimpleAssemblyNameTypeSerializer()
+.UseDefaultTypeSerializer()
+.UseMemoryStorage());
+builder.Services.AddHangfireServer();
 
 
 var app = builder.Build();
@@ -51,11 +78,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseHangfireDashboard();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();

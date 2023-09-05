@@ -1,0 +1,56 @@
+﻿@model My_Final_Project.Models.DTOs.BaseResponse<IEnumerable<My_Final_Project.Models.DTOs.BookingDto>>
+
+<div class="container p-3">
+
+    <div class="row pt-4">
+
+        <div class="col-6">
+
+            <h2 calss="text-primary">All Bookings</h2>
+
+        </div>
+
+        <div>
+
+            <table class="table table-bordered table-striped" style="width:100%">
+
+                <thead>
+
+                    <tr>
+                        <th>
+                            AppointmentDateTime
+                        </th>
+                    </tr>
+
+                </thead>
+
+                @foreach (var bookings in Model.Data)
+                {
+                    <tr>
+
+                        <th>
+                            @bookings.AppointmentDateTime
+                        </th>
+
+                        <th>
+                            <a asp-controller="Booking" asp-action="Profile" asp-route-id="@bookings.TherapistId"><i class="bi bi-pencil-fill"></i>View Info</a>
+                        </th>
+
+                        <th>
+                            <a asp-controller="Booking" asp-action="Update" asp-route-id="@bookings.TherapistId" class="btn btn-warning"><i class="bi bi-pencil-fill"></i>Edit</a>
+                        </th>
+
+                        <th>
+                            <a asp-controller="Booking" asp-action="Delete" asp-route-id="@bookings.TherapistId" class="btn btn-danger">Delete</a>
+                        </th>
+                    </tr>
+
+                }
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

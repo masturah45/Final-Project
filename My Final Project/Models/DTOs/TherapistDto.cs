@@ -1,4 +1,7 @@
-﻿using My_Final_Project.Models.Enum;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using My_Final_Project.Models.Entities;
+using My_Final_Project.Models.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace My_Final_Project.Models.DTOs
 {
@@ -8,31 +11,75 @@ namespace My_Final_Project.Models.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
+        public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Certificate { get; set; }
+        public string Credential { get; set; }
+        public string RegNo { get; set; }
+        public string ProfilePicture { get; set; }
         public Guid UserId { get; set; }
+        public bool IsAvailable { get; set; }
         public Gender Gender { get; set; }
+        public string Description { get; set; }
+        public List<Guid> IssueIds { get; set; }
+        public IList<TherapistIssue> TherapistIssues { get; set; }
+        public SelectList Issues { get; set; } 
     }
 
     public class CreateTherapistRequestModel
     {
+        [Required(AllowEmptyStrings =false, ErrorMessage = "Your {0} is required")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "{0} should be between 8 to 20 Char")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+        [Required(ErrorMessage = "Your {0} is required")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "{0} should be between 8 to 20 Char")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+       // [RegularExpression("/[A-Z]/[a-z]/", ErrorMessage = "PhoneNumber does not exist")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+        [Required(ErrorMessage = "Your {0} is required")]
+        [StringLength(20, MinimumLength = 2, ErrorMessage = "{0} should be between 2 to 20 Char")]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+       // [RegularExpression("/A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)Z/", ErrorMessage = "Invalid Email Id")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string Password { get; set; }
-
+        //[RegularExpression("/[/]/", ErrorMessage = "Invalid RegNo")]
+        [Display(Name = "RegNo")]
+        public string RegNo { get; set; }
+        public IFormFile? Certificate { get; set; }
+        public IFormFile? Credential { get; set; }
+        public IFormFile? ProfilePicture { get; set; }
+        [Required(ErrorMessage = "Your {0} is required")]
+        [StringLength(60, MinimumLength = 4, ErrorMessage = "{0} should be between 4 to 60 Char")]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
         public Gender Gender { get; set; }
+        //public Guid IssueId { get; set; }
+        public List<Guid>? IssueIds { get; set; }
+        public SelectList? Issues { get; set; }
+
     }
 
     public class UpdateTherapistRequestModel
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public Gender Gender { get; set; }
+        public IFormFile ProfilePicture { get; set; }
+        public string Description { get; set; }
+        public List<Guid> IssueIds { get; set; }
+        public SelectList Issues { get; set; }
     }
 }
 

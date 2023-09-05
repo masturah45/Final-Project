@@ -1,4 +1,4 @@
-﻿@using My_Final_Project.Models.Enum
+﻿
 @model IEnumerable<My_Final_Project.Models.DTOs.TherapistDto>
 
 <div class="container p-3">
@@ -29,6 +29,15 @@
                         <th>
                             PhoneNumber
                         </th>
+                        <th>
+                            RegNo
+                        </th>
+                        <th>
+                            Credential
+                        </th>
+                        <th>
+                            Certificate
+                        </th>
 
                     </tr>
 
@@ -48,14 +57,20 @@
                         <th>
                             @therapist.PhoneNumber
                         </th>
+                        <th>
+                            @therapist.RegNo
+                        </th>
+                        <th>
+                            @therapist.Credential
+                        </th>
+                        <th>
+                            @therapist.Certificate
+                        </th>
                     </tr>
-
-                    <div style="margin-bottom:2%">
-                        <input type="submit" value="Aprrove" id="form-submit">
-                    </div>
                 }
 
             </table>
         </div>
 
     </div>
+</div>

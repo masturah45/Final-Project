@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using My_Final_Project.Implementations.Services;
 using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
 using System.Security.Claims;
@@ -29,9 +30,14 @@ namespace My_Final_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateClientRequestModel model)
         {
-            await _clientService.Create(model);
-            ViewBag.Message = "Client created successfully";
-            return RedirectToAction("LogIn", "User");
+                if(ModelState.IsValid)
+                {
+                    TempData["error"] = "Client Created error";
+                    return View(model);
+                }
+                await _clientService.Create(model);
+                TempData["success"] = "Client Created Successfully";
+                return RedirectToAction("Index", "Home");
         }
 
 
@@ -43,7 +49,7 @@ namespace My_Final_Project.Controllers
             {
                 ViewBag.Error = "Client doesnt exist";
             }
-            return View();
+            return View(client.Data);
         }
 
 
@@ -53,26 +59,36 @@ namespace My_Final_Project.Controllers
 
 
             await _clientService.Update(id, model);
-            ViewBag.Message = "Client edited successfully";
-            return RedirectToAction("GetAllClient", "Client");
+            TempData["success"] = "Client updated successfully";
+            return RedirectToAction("Profile", "Client");
         }
 
-        [Authorize(Roles = "Client")]
-        [HttpGet]
+        //[Authorize(Roles = "Client")]
+        //[HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
 
             var client = await _clientService.GetClient(id);
             if (client == null)
             {
-                ViewBag.Error = "Client cannot be deleted";
+                ViewBag.Error = "doesnt exist";
             }
-            return View(client);
+            return View(client.Data);
+        }
+        //[HttpGet]
+
+        //[HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            await _clientService.Delete(id);
+            TempData["error"] = "Client deleted successfully";
+            return RedirectToAction("GetAll", "Client");
         }
         [HttpGet]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<IActionResult> Profile(Guid id)
         {
             var client = await _clientService.GetClient(id);
+            TempData["sucess"] = "Client Profile";
             if (client == null)
             {
                 ViewBag.Error = "Client doesnt exist";
@@ -83,8 +99,9 @@ namespace My_Final_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var client = await _clientService.GetAllClient();
-            return View(client);
+            var clients = await _clientService.GetAll();
+            TempData["success"] = "All Client";
+            return View(clients);
         }
     }
 }

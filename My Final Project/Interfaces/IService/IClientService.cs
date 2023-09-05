@@ -8,6 +8,7 @@ namespace My_Final_Project.Interfaces.IService
         Task<BaseResponse<ClientDto>> Update(Guid id, UpdateClientRequestModel model);
         Task<BaseResponse<ClientDto>> GetClient(Guid id);
         Task<BaseResponse<ClientDto>> Delete(Guid id);
-        Task<IEnumerable<ClientDto>> GetAllClient();
+        Task<IEnumerable<ClientDto>> GetAll();
+        Task<List<UserDto>> GetAllClientByChat();
     }
 }

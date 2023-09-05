@@ -1,0 +1,55 @@
+﻿@using My_Final_Project.Models.Enum
+@model My_Final_Project.Models.DTOs.ClientDto
+<partial name="_Notification" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Delete Client</title>
+</head>
+
+
+<dl>
+    <br>
+    <br>
+    <h2><marquee direction="left">Delete Client</marquee></h2>
+
+    <dt>
+        <h4>@Html.DisplayNameFor(model => model.FirstName) :</h4>
+    </dt>
+    <dd>
+        <h4>@Html.DisplayFor(model => model.FirstName) </h4>
+    </dd>
+    <br>
+    <dt>
+        <h4>@Html.DisplayNameFor(model => model.LastName) :</h4>
+    </dt>
+    <dd>
+        <h4>@Html.DisplayFor(model => model.LastName) </h4>
+    </dd>
+    <br>
+    <dt>
+        <h4>@Html.DisplayNameFor(model => model.Email) :</h4>
+    </dt>
+    <dd>
+        <h4>@Html.DisplayFor(model => model.Email) </h4>
+    </dd>
+    <br>
+    <dt>
+        <h4>@Html.DisplayNameFor(model => model.PhoneNumber) :</h4>
+    </dt>
+    <dd>
+        <h4>@Html.DisplayFor(model => model.PhoneNumber) </h4>
+    </dd>
+    <br>
+    <br>
+
+    <br>
+    <br>
+</dl>
+<br>
+<br>
+
+<button class="btn btn-danger"><a asp-controller="Client" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">Confirm Delete</a></button>
+<button id="trans" style="background-color:darkblue;"><a asp-controller="Client" asp-action="GetAll">Back to List</a></button>

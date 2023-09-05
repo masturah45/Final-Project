@@ -1,4 +1,6 @@
 ﻿using My_Final_Project.Models.Enum;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace My_Final_Project.Models.DTOs
 {
@@ -13,25 +15,35 @@ namespace My_Final_Project.Models.DTOs
         public Guid UserId { get; set; }
         public Gender Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string Country { get; set; }
         public string State { get; set; }
-        public string Address { get; set; }
-        public double WalletBalance { get; set; }
+    
     }
 
     public class CreateClientRequestModel
     {
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Your {0} is required")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "{0} should be between 8 to 20 Char")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Your {0} is required")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "{0} should be between 8 to 20 Char")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [RegularExpression("/[A-Z]/[a-z]/", ErrorMessage = "PhoneNumber does not exist")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string Password { get; set; }
+        [RegularExpression("/A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)Z/", ErrorMessage = "Invalid Email Id")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
         public Gender Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string Country { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Your {0} is required")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "{0} should be between 8 to 20 Char")]
+        [Display(Name = "State")]
         public string State { get; set; }
-        public string Address { get; set; }
-        public double WalletBalance { get; set; }
     }
 
     public class UpdateClientRequestModel
@@ -43,10 +55,8 @@ namespace My_Final_Project.Models.DTOs
         public string Email { get; set; }
         public Gender Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string Country { get; set; }
         public string State { get; set; }
-        public string Address { get; set; }
-        public double WalletBalance { get; set; }
+
     }
 }
 

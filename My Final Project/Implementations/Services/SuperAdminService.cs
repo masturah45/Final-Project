@@ -54,8 +54,6 @@ namespace My_Final_Project.Implementations.Services
             {
                 User = user,
                 UserId = Guid.NewGuid(),
-                AccountNumber = model.AccountNumber,
-                BankName = model.BankName,
             };
 
             await _superadminRepository.Add(superAdmin);
@@ -96,14 +94,12 @@ namespace My_Final_Project.Implementations.Services
             var superadmins = await _superadminRepository.GetAll();
             var listOfSuperAdmins = superadmins.Select(a => new SuperAdminDto
             {
-                Id = Guid.NewGuid(),
+                Id = a.Id,
                 UserId = a.UserId,
                 FirstName = a.User.FirstName,
                 LastName = a.User.LastName,
                 Email = a.User.Email,
                 PhoneNumber = a.User.PhoneNumber,
-                AccountNumber = a.AccountNumber,
-                BankName = a.BankName,
             }).ToList();
             return listOfSuperAdmins;
         }
@@ -123,13 +119,11 @@ namespace My_Final_Project.Implementations.Services
                 Status = true,
                 Data = new SuperAdminDto
                 {
-                    Id = Guid.NewGuid(),
+                    Id = superAdmin.Id,
                     FirstName = superAdmin.User.FirstName,
                     LastName = superAdmin.User.LastName,
                     PhoneNumber = superAdmin.User.PhoneNumber,
                     Email = superAdmin.User.Email,
-                    AccountNumber = superAdmin.AccountNumber,
-                    BankName = superAdmin.BankName,
                 }
             };
         }
@@ -148,8 +142,6 @@ namespace My_Final_Project.Implementations.Services
             superadmin.User.Password = model.Password;
             superadmin.User.Email = model.Password;
             superadmin.User.PhoneNumber = model.PhoneNumber;
-            superadmin.AccountNumber = model.AccountNumber;
-            superadmin.BankName = model.BankName;
             superadmin.DateCreated = DateTime.Now;
             superadmin.DateUpdated = DateTime.Now;
             superadmin.IsDeleted = false;

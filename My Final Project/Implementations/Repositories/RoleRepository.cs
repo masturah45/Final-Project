@@ -31,15 +31,13 @@ namespace My_Final_Project.Implementations.Repositories
 
         public async Task<Role> GetRole(Expression<Func<Role, bool>> expression)
         {
-            return await _context.Roles
-                .Include(r => r.UserRoles)
-                .ThenInclude(r => r.User)
-                .FirstOrDefaultAsync(expression);
+            return await _context.Roles.FirstOrDefaultAsync(expression);
         }
 
-        public async Task<Role> GetRoleByName(string name)
+        public Role GetRoleByName(string name)
         {
-            return await _context.Roles.SingleOrDefaultAsync(x => x.Name == name);
+            var role =_context.Roles.FirstOrDefault(x => x.Name == name);
+            return role;
         }
     }
 }

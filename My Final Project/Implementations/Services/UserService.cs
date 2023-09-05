@@ -4,6 +4,7 @@ using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
 using My_Final_Project.Models.Entities;
 using System.Data;
+using System.Text.Json.Serialization;
 
 namespace My_Final_Project.Implementations.Services
 {
@@ -11,11 +12,17 @@ namespace My_Final_Project.Implementations.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly ITherapistRepository _theraphy;
+        private readonly IClientRepository _client;
+        private readonly ISuperAdminRepository _superAdmin;
 
-        public UserService(IUserRepository userRepository, IRoleRepository roleRepository)
+        public UserService(IUserRepository userRepository, IRoleRepository roleRepository, ITherapistRepository theraphy, IClientRepository client, ISuperAdminRepository superAdmin)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
+            _theraphy = theraphy;
+            _client = client;
+            _superAdmin = superAdmin;
         }
         public async Task<BaseResponse<UserDto>> AssignRole(Guid id, List<int> roleIds)
         {
@@ -109,8 +116,23 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<UserDto>> Login(LogInUserRequestModel model)
         {
-            var user = await _userRepository.Get(a => a.Email == model.Email);
-            if (user == null || user.Email != model.Email && user.Password != model.Password) return new BaseResponse<UserDto>
+            var user = await _userRepository.Get(a => a.Email == model.Email && a.Password == model.Password);
+            dynamic us = null;
+            if(user.Client!=null)
+            {
+                us = await _client.GetClient(a => a.UserId == user.Id);
+            }
+            if(user.Therapist!=null)
+            {
+                us = await _theraphy.GetTherapist(a => a.UserId == user.Id);
+
+            }
+            if(user.SuperAdmin!=null)
+            {
+                us = await _superAdmin.GetSuperAdmin(a => a.UserId == user.Id);
+            }
+           
+            if (user == null) return new BaseResponse<UserDto>
             {
                 Message = "incorrect details",
                 Status = false,
@@ -123,9 +145,11 @@ namespace My_Final_Project.Implementations.Services
                 Data = new UserDto
                 {
                     Id = user.Id,
+                    Id2 = us.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
 
                     Roles = user.UserRoles.Select(a => new RoleDto
                     {

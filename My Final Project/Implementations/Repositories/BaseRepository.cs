@@ -45,14 +45,14 @@ namespace My_Final_Project.Implementations.Repositories
 
         public async Task<bool> save()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return true;
         }
 
         public async Task<T> Update(T entity)
         {
             _context.Set<T>().Update(entity);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return entity;
         }
     }

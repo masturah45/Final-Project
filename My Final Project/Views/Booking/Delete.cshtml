@@ -1,0 +1,31 @@
+﻿@using My_Final_Project.Models.Enum
+@model My_Final_Project.Models.DTOs.BookingDto
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Delete Booking</title>
+</head>
+
+
+<dl>
+    <br>
+    <br>
+    <dt>
+        <h4>@Html.DisplayNameFor(model => model.AppointmentDateTime) :</h4>
+    </dt>
+    <dd>
+        <h4>@Html.DisplayFor(model => model.AppointmentDateTime) </h4>
+    </dd>
+    <br>
+
+    <br>
+    <br>
+</dl>
+<br>
+<br>
+
+<button class="btn btn-danger"><a asp-controller="Booking" asp-action="DeleteConfirmed" asp-route-TherapistId="@Model.TherapistId">Confirm Delete</a></button>
+<button id="trans" style="background-color:darkblue;"><a asp-controller="Issues" asp-action="GetAll">Back to List</a></button>
+

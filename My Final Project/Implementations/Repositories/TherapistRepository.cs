@@ -15,29 +15,47 @@ namespace My_Final_Project.Implementations.Repositories
             _context = context;
         }
 
+        public async Task<Therapist> CheckIfExist(string email)
+        {
+            return await _context.Therapists.Where(e => e.User.Email.Equals(email)).FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Therapist>> GetAvailableTherapist()
+        {
+            return await _context.Therapists.Where(x => x.IsAvalaible == true).ToListAsync();
+        }
+
         public async Task<IEnumerable<Therapist>> GetAllTherapist()
+        {
+            return await _context.Therapists
+                .Include(x => x.TherapistIssues)
+                .ThenInclude(x => x.Issue)
+                .Include(a => a.User).Where(x => !x.IsDeleted).ToListAsync();
+        }
+
+        public async Task<List<Therapist>> GetAllTherapistByChat()
         {
             return await _context.Therapists.Include(a => a.User).ToListAsync();
         }
 
         public async Task<IEnumerable<Therapist>> GetApprovedTherapist()
         {
-            return await _context.Therapists.Where(x => x.Status == Aprrove.Approved).ToListAsync();
+            return await _context.Therapists.Where(x => x.Status == Aprrove.Approved && x.IsDeleted == false).Include(a => a.User).ToListAsync();
         }
 
         public async Task<Therapist> GetTherapist(Guid id)
         {
-            return await _context.Therapists.Include(a => a.User).FirstOrDefaultAsync(a => a.Id == id);
+            return await _context.Therapists.Include(a => a.User).Where(x => x.IsDeleted == false).FirstOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<Therapist> GetTherapist(Expression<Func<Therapist, bool>> expression)
         {
-            return await _context.Therapists.Include(a => a.User).FirstOrDefaultAsync(expression);
+            return await _context.Therapists.Include(a => a.User).Where(x => x.IsDeleted == false).FirstOrDefaultAsync(expression);
         }
 
         public async Task<IEnumerable<Therapist>> GetUnapprovedTherapist()
         {
-            return await _context.Therapists.Where(x => x.Status == Aprrove.Pending).ToListAsync();
+            return await _context.Therapists.Where(x => x.Status == Aprrove.Pending && x.IsDeleted == false).Include(a => a.User).ToListAsync();
         }
     }
 }

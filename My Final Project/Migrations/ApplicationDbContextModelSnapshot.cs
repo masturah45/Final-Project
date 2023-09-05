@@ -34,13 +34,13 @@ namespace My_Final_Project.Migrations
                     b.ToTable("ClientTherapist");
                 });
 
-            modelBuilder.Entity("My_Final_Project.Models.Entities.Appointment", b =>
+            modelBuilder.Entity("My_Final_Project.Models.Entities.Booking", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<DateTime>("BookingDate")
+                    b.Property<DateTime>("AppointmentDateTime")
                         .HasColumnType("datetime(6)");
 
                     b.Property<Guid>("ClientId")
@@ -52,19 +52,11 @@ namespace My_Final_Project.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Day")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Duration")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("MeetingLink")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<Guid>("TherapistId")
                         .HasColumnType("char(36)");
@@ -75,7 +67,46 @@ namespace My_Final_Project.Migrations
 
                     b.HasIndex("TherapistId");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Bookings");
+                });
+
+            modelBuilder.Entity("My_Final_Project.Models.Entities.Chat", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PostedTime")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("Seen")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<Guid>("TherapistId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Chats");
                 });
 
             modelBuilder.Entity("My_Final_Project.Models.Entities.Client", b =>
@@ -83,14 +114,6 @@ namespace My_Final_Project.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime(6)");
@@ -114,15 +137,40 @@ namespace My_Final_Project.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
 
-                    b.Property<double>("WalletBalance")
-                        .HasColumnType("double");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("My_Final_Project.Models.Entities.Issue", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Issues");
                 });
 
             modelBuilder.Entity("My_Final_Project.Models.Entities.Role", b =>
@@ -159,14 +207,6 @@ namespace My_Final_Project.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("AccountNumber")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("BankName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime(6)");
 
@@ -193,6 +233,67 @@ namespace My_Final_Project.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("Certificate")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Credential")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsAvalaible")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<Guid?>("IssueId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ProfilePicture")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RegNo")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IssueId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Therapists");
+                });
+
+            modelBuilder.Entity("My_Final_Project.Models.Entities.TherapistIssue", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime(6)");
 
@@ -202,38 +303,19 @@ namespace My_Final_Project.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("IssueId")
                         .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Therapists");
-                });
-
-            modelBuilder.Entity("My_Final_Project.Models.Entities.TherapistAvalability", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<int>("Day")
-                        .HasColumnType("int");
-
-                    b.Property<TimeOnly>("EndTime")
-                        .HasColumnType("time(6)");
 
                     b.Property<Guid>("TherapistId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TherapistAvalability");
+                    b.HasIndex("IssueId");
+
+                    b.HasIndex("TherapistId");
+
+                    b.ToTable("TherapistIssues");
                 });
 
             modelBuilder.Entity("My_Final_Project.Models.Entities.User", b =>
@@ -324,19 +406,34 @@ namespace My_Final_Project.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("My_Final_Project.Models.Entities.Appointment", b =>
+            modelBuilder.Entity("My_Final_Project.Models.Entities.Booking", b =>
                 {
-                    b.HasOne("My_Final_Project.Models.Entities.Client", null)
-                        .WithMany("Appointments")
+                    b.HasOne("My_Final_Project.Models.Entities.Client", "Client")
+                        .WithMany("Bookings")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("My_Final_Project.Models.Entities.Therapist", null)
-                        .WithMany("Appointments")
+                    b.HasOne("My_Final_Project.Models.Entities.Therapist", "Therapist")
+                        .WithMany("Bookings")
                         .HasForeignKey("TherapistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Therapist");
+                });
+
+            modelBuilder.Entity("My_Final_Project.Models.Entities.Chat", b =>
+                {
+                    b.HasOne("My_Final_Project.Models.Entities.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("My_Final_Project.Models.Entities.Client", b =>
@@ -363,6 +460,10 @@ namespace My_Final_Project.Migrations
 
             modelBuilder.Entity("My_Final_Project.Models.Entities.Therapist", b =>
                 {
+                    b.HasOne("My_Final_Project.Models.Entities.Issue", null)
+                        .WithMany("Therapists")
+                        .HasForeignKey("IssueId");
+
                     b.HasOne("My_Final_Project.Models.Entities.User", "User")
                         .WithOne("Therapist")
                         .HasForeignKey("My_Final_Project.Models.Entities.Therapist", "UserId")
@@ -370,6 +471,25 @@ namespace My_Final_Project.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("My_Final_Project.Models.Entities.TherapistIssue", b =>
+                {
+                    b.HasOne("My_Final_Project.Models.Entities.Issue", "Issue")
+                        .WithMany()
+                        .HasForeignKey("IssueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("My_Final_Project.Models.Entities.Therapist", "Therapist")
+                        .WithMany("TherapistIssues")
+                        .HasForeignKey("TherapistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Issue");
+
+                    b.Navigation("Therapist");
                 });
 
             modelBuilder.Entity("My_Final_Project.Models.Entities.UserRole", b =>
@@ -393,7 +513,12 @@ namespace My_Final_Project.Migrations
 
             modelBuilder.Entity("My_Final_Project.Models.Entities.Client", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("My_Final_Project.Models.Entities.Issue", b =>
+                {
+                    b.Navigation("Therapists");
                 });
 
             modelBuilder.Entity("My_Final_Project.Models.Entities.Role", b =>
@@ -403,7 +528,9 @@ namespace My_Final_Project.Migrations
 
             modelBuilder.Entity("My_Final_Project.Models.Entities.Therapist", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("Bookings");
+
+                    b.Navigation("TherapistIssues");
                 });
 
             modelBuilder.Entity("My_Final_Project.Models.Entities.User", b =>

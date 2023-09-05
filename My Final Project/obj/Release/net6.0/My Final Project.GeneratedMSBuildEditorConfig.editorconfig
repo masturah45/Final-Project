@@ -1,0 +1,180 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = My_Final_Project
+build_property.RootNamespace = My_Final_Project
+build_property.ProjectDir = C:\Users\ADESANYA\source\repos\Final Project\My Final Project\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\ADESANYA\source\repos\Final Project\My Final Project
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Booking/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Booking/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Booking/GetAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xHZXRBbGwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Booking/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Booking/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Chat/Chat.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxDaGF0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Chat/GetAllChats.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxHZXRBbGxDaGF0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Client/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Client/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Client/GetAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEdldEFsbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Client/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Client/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Issues/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXNzdWVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Issues/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXNzdWVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Issues/GetAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXNzdWVzXEdldEFsbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Issues/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXNzdWVzXFByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Issues/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXNzdWVzXFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Role/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Shared/_Notification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/SuperAdmin/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/GetAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEdldEFsbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/GetAllTherapist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEdldEFsbFRoZXJhcGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/GetAvailable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEdldEF2YWlsYWJsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/GetTherapistByIssues.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEdldFRoZXJhcGlzdEJ5SXNzdWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XFByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/ViewApprovedTherapist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XFZpZXdBcHByb3ZlZFRoZXJhcGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/ViewUnApprovedTherapist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XFZpZXdVbkFwcHJvdmVkVGhlcmFwaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/User/ClientBoard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDbGllbnRCb2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/User/SuperAdminBoard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTdXBlckFkbWluQm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/User/TherapistBoard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxUaGVyYXBpc3RCb2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Shared/_Layout - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQgLSBDb3B5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = b-n37byrjhjv
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-uz3rinn8ki

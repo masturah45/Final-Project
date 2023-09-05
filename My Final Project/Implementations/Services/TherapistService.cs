@@ -1,7 +1,11 @@
-﻿using My_Final_Project.Interfaces.IRepositories;
+﻿using Microsoft.AspNetCore.Http;
+using My_Final_Project.FileManager;
+using My_Final_Project.Implementations.Repositories;
+using My_Final_Project.Interfaces.IRepositories;
 using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
 using My_Final_Project.Models.Entities;
+using My_Final_Project.Models.Enum;
 
 namespace My_Final_Project.Implementations.Services
 {
@@ -10,27 +14,36 @@ namespace My_Final_Project.Implementations.Services
         private readonly ITherapistRepository _therapistRepository;
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly IFileManager _fileManager;
+        private readonly IIssuesRepository _issuesRepository;
+        private readonly INotificationMessage _notificationMessage;
 
-        public TherapistService(ITherapistRepository therapistRepository, IUserRepository userRepository, IRoleRepository roleRepository)
+        public TherapistService(ITherapistRepository therapistRepository, IUserRepository userRepository, IRoleRepository roleRepository, IFileManager fileManager, IIssuesRepository issuesRepository, INotificationMessage notificationMessage)
         {
             _therapistRepository = therapistRepository;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
+            _fileManager = fileManager;
+            _issuesRepository = issuesRepository;
+            _notificationMessage = notificationMessage;     
         }
 
         public async Task<BaseResponse<TherapistDto>> Create(CreateTherapistRequestModel model)
         {
-            var therapistExist = await _userRepository.Get(a => a.Email == model.Email);
-            if (therapistExist != null) return new BaseResponse<TherapistDto>
+            var request = new WhatsappMessageSenderRequestModel { ReciprantNumber = model.PhoneNumber, MessageBody = "Therapist created Successfully" };
+            await _notificationMessage.SendWhatsappMessageAsync(request);
+
+            var checkIfExist = await _therapistRepository.CheckIfExist(model.Email);
+            if (checkIfExist != null) return new BaseResponse<TherapistDto>
             {
                 Message = "User already exist",
                 Status = false,
             };
-
             var role = await _roleRepository.Get(b => b.Name == "Therapist");
 
             var user = new User
             {
+                Id = Guid.NewGuid(),
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
@@ -46,21 +59,48 @@ namespace My_Final_Project.Implementations.Services
 
             var userRole = new UserRole
             {
-                UserId = Guid.NewGuid(),
-                RoleId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
+                UserId = user.Id,
+                RoleId = role.Id,
                 Role = role,
                 User = user,
             };
-            user.UserRoles.Add(userRole);
-            await _userRepository.Add(user);
+
+            var certificatefile = await _fileManager.UploadFileToSystem(model.Certificate);
+            var credentialsfile = await _fileManager.UploadFileToSystem(model.Credential);
+            var profilepicturefile = await _fileManager.UploadFileToSystem(model.ProfilePicture);   
+            var issues = new List<TherapistIssue>();
 
             var therapist = new Therapist
             {
+                Id = Guid.NewGuid(),
+                Certificate = certificatefile.Data.Name,
+                Credential = credentialsfile.Data.Name,
+                ProfilePicture = profilepicturefile.Data.Name,
+                UserName = model.UserName,
+                RegNo = model.RegNo,
+                Description = model.Description,
                 User = user,
-                UserId = Guid.NewGuid(),
+                UserId = user.Id,
+                TherapistIssues = issues,
             };
+            foreach (var item in model.IssueIds)
+            {
+                var issue = await _issuesRepository.Get(item);
+                var therapistIssue = new TherapistIssue
+                {
+                    Id = Guid.NewGuid(),
+                    Issue = issue,
+                    IssueId = item,
+                    TherapistId = therapist.Id, 
+                    Therapist=therapist,
+                };
+                issues.Add(therapistIssue);
+            }
+            user.UserRoles.Add(userRole);
+            user.Therapist = therapist;
+            await _userRepository.Add(user);
 
-            await _therapistRepository.Add(therapist);
 
             return new BaseResponse<TherapistDto>
             {
@@ -71,24 +111,26 @@ namespace My_Final_Project.Implementations.Services
                     FirstName = therapist.User.FirstName,
                     LastName = therapist.User.LastName,
                     Email = therapist.User.Email,
+                    Gender = therapist.User.Gender,
                 }
             };
         }
 
         public async Task<BaseResponse<TherapistDto>> Delete(Guid id)
         {
-            var therapist = await _therapistRepository.GetTherapist(id);
+            var therapist = await _therapistRepository.Get(id);
             if (therapist == null) return new BaseResponse<TherapistDto>
             {
                 Message = "Therapist Not Found",
                 Status = false,
             };
 
+            therapist.IsDeleted = true;
             await _therapistRepository.save();
 
             return new BaseResponse<TherapistDto>
             {
-                Message = "Delete Successful",
+                Message = "Deleted Successfully",
                 Status = true,
             };
         }
@@ -108,35 +150,48 @@ namespace My_Final_Project.Implementations.Services
                 Status = true,
                 Data = new TherapistDto
                 {
-                    Id = Guid.NewGuid(),
+                    Id = therapist.Id,
                     FirstName = therapist.User.FirstName,
                     LastName = therapist.User.LastName,
                     PhoneNumber = therapist.User.PhoneNumber,
                     Email = therapist.User.Email,
+                    RegNo = therapist.RegNo,
+                    Certificate = therapist.Certificate,
+                    Credential = therapist.Credential,
+                    ProfilePicture = therapist.ProfilePicture,
                     Password = therapist.User.Password,
-                    Gender = Models.Enum.Gender.Male
+                    Gender = therapist.User.Gender,
+
                 }
             };
         }
 
-        public async Task<IEnumerable<TherapistDto>> GetAllTherapist()
+        public async Task<IEnumerable<TherapistDto>> GetAll()
         {
             var therapists = await _therapistRepository.GetAllTherapist();
             var listOftherapists = therapists.Select(a => new TherapistDto
             {
-                Id = Guid.NewGuid(),
+                Id = a.Id,
                 UserId = a.UserId,
                 FirstName = a.User.FirstName,
                 LastName = a.User.LastName,
                 Email = a.User.Email,
                 Password = a.User.Password,
+                RegNo = a.RegNo,
+                Certificate = a.Certificate,
+                Credential = a.Credential,
+                ProfilePicture = a.ProfilePicture,
                 PhoneNumber = a.User.PhoneNumber,
+                Description = a.Description,
+                TherapistIssues = a.TherapistIssues,
             }).ToList();
             return listOftherapists;
         }
 
         public async Task<BaseResponse<TherapistDto>> Update(Guid id, UpdateTherapistRequestModel model)
         {
+            var request = new WhatsappMessageSenderRequestModel { ReciprantNumber = model.PhoneNumber, MessageBody = "Therapist updated successfully" };
+            await _notificationMessage.SendWhatsappMessageAsync(request);
             var therapist = await _therapistRepository.GetTherapist(id);
             if (therapist == null) return new BaseResponse<TherapistDto>
             {
@@ -147,7 +202,7 @@ namespace My_Final_Project.Implementations.Services
             therapist.User.FirstName = model.FirstName;
             therapist.User.LastName = model.LastName;
             therapist.User.Password = model.Password;
-            therapist.User.Password = model.Password;
+            therapist.User.Email = model.Email;
             therapist.User.PhoneNumber = model.PhoneNumber;
             therapist.DateCreated = DateTime.Now;
             therapist.DateUpdated = DateTime.Now;
@@ -177,13 +232,14 @@ namespace My_Final_Project.Implementations.Services
             };
             var listOftherapists = therapist.Select(a => new TherapistDto
             {
-                Id = Guid.NewGuid(),
+                Id = a.Id,
                 UserId = a.UserId,
                 FirstName = a.User.FirstName,
                 LastName = a.User.LastName,
-                Email = a.User.Email,
-                Password = a.User.Password,
                 PhoneNumber = a.User.PhoneNumber,
+                RegNo = a.RegNo,
+                Certificate = a.Certificate,
+                Credential = a.Credential,
             }).ToList();
             return new BaseResponse<IEnumerable<TherapistDto>>
             {
@@ -202,16 +258,16 @@ namespace My_Final_Project.Implementations.Services
                 Message = "Therapist not found",
                 Status = false,
             };
-
             var listOftherapists = therapist.Select(a => new TherapistDto
             {
-                Id = Guid.NewGuid(),
+                Id = a.Id,
                 UserId = a.UserId,
                 FirstName = a.User.FirstName,
                 LastName = a.User.LastName,
-                Email = a.User.Email,
-                Password = a.User.Password,
                 PhoneNumber = a.User.PhoneNumber,
+                Certificate = a.Certificate,
+                RegNo = a.RegNo,
+                Credential = a.Credential,
             }).ToList();
             return new BaseResponse<IEnumerable<TherapistDto>>
             {
@@ -221,23 +277,100 @@ namespace My_Final_Project.Implementations.Services
             };
         }
 
-        public async Task<BaseResponse<TherapistDto>> RemoveapprovedTherapist(Guid id)
+        public async Task<BaseResponse<TherapistDto>> RejectapprovedTherapist(Guid id)
         {
             var therapist = await _therapistRepository.GetTherapist(id);
             if (therapist == null) return new BaseResponse<TherapistDto>
             {
-                Message = "Successful",
+                Message = "Not Successful",
                 Status = false,
             };
-            therapist.IsDeleted = true;
+            therapist.Status = Aprrove.Rejected;
             await _therapistRepository.save();
 
             return new BaseResponse<TherapistDto>
             {
                 Message = "Delete Successful",
                 Status = true,
+                Data = new TherapistDto
+                {
+                    Id = therapist.Id,
+                    FirstName = therapist.User.FirstName,
+                    LastName = therapist.User.LastName,
+                    PhoneNumber = therapist.User.PhoneNumber,
+                    RegNo = therapist.RegNo,
+                    Certificate = therapist.Certificate,
+                    Credential = therapist.Credential,
+                }
             };
 
+        }
+
+        public async Task<BaseResponse<IEnumerable<TherapistDto>>> GetAvailableTherapist()
+        {
+            var therapist = await _therapistRepository.GetAvailableTherapist();
+            if (therapist == null) return new BaseResponse<IEnumerable<TherapistDto>>
+            {
+                Message = "Therapist not found",
+                Status = false,
+            };
+
+            var listOftherapists = therapist.Select(a => new TherapistDto
+            {
+                Id = a.Id,
+                UserId = a.UserId,
+                FirstName = a.User.FirstName,
+                LastName = a.User.LastName,
+                Email = a.User.Email,
+            }).ToList();
+            return new BaseResponse<IEnumerable<TherapistDto>>
+            {
+                Message = "Successful",
+                Status = true,
+                Data = listOftherapists
+            };
+        }
+
+        public async Task<List<UserDto>> GetAllTherapistByChat()
+        {
+            var therapists = await _therapistRepository.GetAllTherapist();
+            var listOfTherapists = therapists.Select(a => new UserDto
+            {
+                Id = a.Id,
+                FirstName = a.User.FirstName,
+                LastName = a.User.LastName,
+            }).ToList();
+            return listOfTherapists;
+
+        }
+
+        public async Task<BaseResponse<TherapistDto>> Approve(Guid id)
+        {
+            var therapist = await _therapistRepository.GetTherapist(id);
+            if (therapist == null) return new BaseResponse<TherapistDto>
+            {
+                Message = "Not Successful",
+                Status = false,
+            };
+            therapist.Status = Aprrove.Approved;
+            await _therapistRepository.save();
+
+            return new BaseResponse<TherapistDto>
+            {
+                Message = "Delete Successful",
+                Status = true,
+                Data = new TherapistDto
+                {
+                    Id = therapist.Id,
+                    FirstName = therapist.User.FirstName,
+                    LastName = therapist.User.LastName,
+                    PhoneNumber = therapist.User.PhoneNumber,
+                    RegNo = therapist.RegNo,
+                    Certificate = therapist.Certificate,
+                    Credential = therapist.Credential,
+                }
+
+            };
         }
     }
 }

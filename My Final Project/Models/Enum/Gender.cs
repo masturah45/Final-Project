@@ -7,3 +7,11 @@
         RatherNotSay = 3,
     }
 }
+//therapist add or remove from issues
+//therapist see a client booking
+//fix client registartiong paage
+//add view profile to side bar
+//fix logout
+//everything about booking needed to be fixed
+//cancel booking
+//button return to dah board

@@ -1,4 +1,4 @@
-﻿@using My_Final_Project.Models.Enum
+﻿
 @model IEnumerable<My_Final_Project.Models.DTOs.TherapistDto>
 
 <div class="container p-3">
@@ -29,6 +29,15 @@
                         <th>
                             PhoneNumber
                         </th>
+                        <th>
+                            RegNo
+                        </th>
+                        <th>
+                            Certificate
+                        </th>
+                        <th>
+                            Credential
+                        </th>
 
                     </tr>
 
@@ -48,11 +57,22 @@
                         <th>
                             @therapist.PhoneNumber
                         </th>
+                        <th>
+                            @therapist.RegNo
+                        </th>
+                        <th>
+                            @therapist.Certificate
+                        </th>
+                        <th>
+                            @therapist.Credential
+                        </th>
+                        <td>
+                            <a asp-controller="Therapist" asp-action="ApprovedTherapist" asp-route-Id="@therapist.Id" class="btn btn-warning"><i class="bi bi-pencil-fill"></i>Approve</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Therapist" asp-action="RejectTherapist" asp-route-Id="@therapist.Id" class="btn btn-danger"><i class="bi bi-pencil-fill"></i>Reject</a>
+                        </td>
                     </tr>
-
-                    <div style="margin-bottom:2%">
-                        <input type="submit" value="Aprrove" id="form-submit">
-                    </div>
                 }
 
             </table>

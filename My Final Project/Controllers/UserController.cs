@@ -4,16 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
 using System.Security.Claims;
+using My_Final_Project.Implementations.Services;
 
 namespace My_Final_Project.Controllers
 {
     public class UserController : Controller
     {
+        private readonly ITherapistService _therapistService;
+
         private readonly IUserService _userService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, ITherapistService therapistService)
         {
             _userService = userService;
+            _therapistService = therapistService;
         }
 
         public IActionResult Index()
@@ -38,43 +42,49 @@ namespace My_Final_Project.Controllers
         public async Task<IActionResult> LogIn(LogInUserRequestModel model)
         {
             var user = await _userService.Login(model);
-            if (user != null)
+            
+            if (user.Data != null)
             {
                 var claims = new List<Claim>
                 {
                      new Claim(ClaimTypes.NameIdentifier , user.Data.Id.ToString()),
+                     new Claim(ClaimTypes.GivenName , user.Data.Id2.ToString()),
                      new Claim(ClaimTypes.Email, user.Data.Email),
+                     new Claim(ClaimTypes.HomePhone, user.Data.PhoneNumber),
                      new Claim(ClaimTypes.Name, user.Data.FirstName + " " + user.Data.LastName),
 
 
                 };
+                foreach (var item in user.Data.Roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, item.Name));
+                }
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
-                var properties = new AuthenticationProperties();
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, properties);
+                await HttpContext.SignInAsync(principal);
                 TempData["Success"] = "Successfully LogIn";
                 if (user.Status == true)
                 {
                     if (user.Data.Roles.Select(r => r.Name).Contains("SuperAdmin"))
-                        return RedirectToAction("GetAllSuperAdmin", "SuperAdmin");
+                        return RedirectToAction("SuperAdminBoard", "User");
 
                     else if (user.Data.Roles.Select(r => r.Name).Contains("Client"))
-                        return RedirectToAction("GetAllClient", "Client");
+                        return RedirectToAction("ClientBoard", "User");
                     else if (user.Data.Roles.Select(r => r.Name).Contains("Therapist"))
-                        return RedirectToAction("GetAllTherapist", "Therapist");
+                        return RedirectToAction("TherapistBoard", "User");
                 }
             }
             ViewBag.error = "Invalid Email or password entered";
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -83,9 +93,10 @@ namespace My_Final_Project.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult ClientBoard()
+        public async Task<IActionResult> ClientBoard()
         {
-            return View();
+            var therapists = await _therapistService.GetAll();
+            return View(therapists);
         }
         [HttpGet]
         public IActionResult TherapistBoard()

@@ -53,8 +53,6 @@ public static class CounsellingAppInitializer
             DateCreated = DateTime.Now,
             DateUpdated = DateTime.Now,
             UserId = user.Id,
-            AccountNumber = "0159192507",
-            BankName = "GTBank",
             User = user,
         };
 

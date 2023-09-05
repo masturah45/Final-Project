@@ -13,7 +13,17 @@ namespace My_Final_Project.Implementations.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Client>> GetAllClients()
+        public async Task<Client> CheckIfExist(string email)
+        {
+            return await _context.Clients.Where(e => e.User.Email.Equals(email)).FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Client>> GetAll()
+        {
+            return await _context.Clients.Include(a => a.User).Where(x => !x.IsDeleted).ToListAsync();
+        }
+
+        public async Task<List<Client>> GetAllClientByChat()
         {
             return await _context.Clients.Include(a => a.User).ToListAsync();
         }
@@ -21,6 +31,10 @@ namespace My_Final_Project.Implementations.Repositories
         public async Task<Client> GetClient(Guid id)
         {
             return await _context.Clients.Include(a => a.User).FirstOrDefaultAsync(a => a.Id == id);
+        }
+         public async Task<Client> GetClientByIdAsync(Guid id)
+        {
+            return await _context.Clients.Include(a => a.User).FirstOrDefaultAsync(a => a.UserId == id);
         }
 
         public async Task<Client> GetClient(Expression<Func<Client, bool>> expression)

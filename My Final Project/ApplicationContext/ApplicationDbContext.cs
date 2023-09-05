@@ -14,9 +14,11 @@ namespace My_Final_Project.ApplicationContext
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Issue>  Issues { get; set; }
         public DbSet<Therapist> Therapists { get; set; }
-        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Chat> Chats { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<TherapistAvalability> TherapistAvalability { get; set; }
+        public DbSet<TherapistIssue> TherapistIssues { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
     }
 }

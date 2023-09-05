@@ -31,10 +31,14 @@ namespace My_Final_Project.Controllers
             var role = await _roleService.Create(model);
             if (role.Status == true)
             {
-                return RedirectToAction("SuperBoard", "User");
+                return RedirectToAction("Index", "Home");
             }
             return View();
         }
+
+
+
+
 
         [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
@@ -53,7 +57,7 @@ namespace My_Final_Project.Controllers
         public IActionResult DeleteConfirmed(Guid id)
         {
             _roleService.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
         [Authorize(Roles = "SuperAdmin")]
         [HttpGet]

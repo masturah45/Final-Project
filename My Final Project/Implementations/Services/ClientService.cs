@@ -3,6 +3,7 @@ using My_Final_Project.Interfaces.IRepositories;
 using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
 using My_Final_Project.Models.Entities;
+using My_Final_Project.Models.Enum;
 
 namespace My_Final_Project.Implementations.Services
 {
@@ -11,25 +12,35 @@ namespace My_Final_Project.Implementations.Services
         private readonly IClientRepository _clientRepository;
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly INotificationMessage _notificationMessage;
 
-        public ClientService(IClientRepository clientRepository, IUserRepository userRepository, IRoleRepository roleRepository)
+        public ClientService(IClientRepository clientRepository, IUserRepository userRepository, IRoleRepository roleRepository, INotificationMessage notificationMessage)
         {
-            clientRepository = _clientRepository;
-            userRepository = _userRepository;
-            roleRepository = _roleRepository;
+            _clientRepository = clientRepository;
+            _userRepository = userRepository;
+            _roleRepository = roleRepository;
+            _notificationMessage = notificationMessage;
         }
 
         public async Task<BaseResponse<ClientDto>> Create(CreateClientRequestModel model)
         {
-            var clientExist = await _userRepository.Get(a => a.Email == model.Email);
-            if (clientExist != null) return new BaseResponse<ClientDto>
+            var request = new WhatsappMessageSenderRequestModel { ReciprantNumber = model.PhoneNumber, MessageBody = "Client created successfully" };
+            await _notificationMessage.SendWhatsappMessageAsync(request);
+            //var clientExist = await _userRepository.Get(a => a.Email == model.Email);
+            //if (clientExist != null) return new BaseResponse<ClientDto>
+            //{
+            //    Message = "User already exist",
+            //    Status = false,
+            //};
+
+            var checkIfExist = await _clientRepository.CheckIfExist(model.Email);
+            if (checkIfExist != null) return new BaseResponse<ClientDto>
             {
                 Message = "User already exist",
                 Status = false,
             };
 
-            var role = await
-            _roleRepository.Get(a => a.Name == "Client");
+            var role = await _roleRepository.Get(a => a.Name == "Client");
 
             var user = new User
             {
@@ -37,7 +48,7 @@ namespace My_Final_Project.Implementations.Services
                 LastName = model.LastName,
                 Password = model.Password,
                 Email = model.Email,
-                PhoneNumber = model.Email,
+                PhoneNumber = model.PhoneNumber,
 
                 UserRoles = new List<UserRole>()
             };
@@ -55,13 +66,10 @@ namespace My_Final_Project.Implementations.Services
             {
                 User = user,
                 UserId = Guid.NewGuid(),
-                WalletBalance = model.WalletBalance,
                 State = model.State,
-                Address = model.Address,
-                Country = model.Country,
                 DateOfBirth = model.DateOfBirth,
-                Gender = Models.Enum.Gender.Male,
-                
+                Gender = model.Gender,
+
             };
             await _clientRepository.Add(client);
 
@@ -75,25 +83,26 @@ namespace My_Final_Project.Implementations.Services
                     LastName = client.User.LastName,
                     Email = client.User.Email,
                     Password = client.User.Password,
+                    Gender = client.User.Gender,    
                 }
             };
         }
 
         public async Task<BaseResponse<ClientDto>> Delete(Guid id)
         {
-            var client = await _clientRepository.GetClient(id);
-            if (client == null) return new
-            BaseResponse<ClientDto>
+            var client = await _clientRepository.Get(id);
+            if (client == null) return new BaseResponse<ClientDto>
             {
-                Message = "client Not Found",
+                Message = "Client Not Found",
                 Status = false,
             };
 
-            _clientRepository.save();
+            client.IsDeleted = true;
+            await _clientRepository.save();
 
             return new BaseResponse<ClientDto>
             {
-                Message = "Delete Successfully",
+                Message = "Deleted Successfully",
                 Status = true,
             };
         }
@@ -113,44 +122,40 @@ namespace My_Final_Project.Implementations.Services
                 Status = true,
                 Data = new ClientDto
                 {
-                    Id = Guid.NewGuid(),
+                    Id = client.Id,
                     FirstName = client.User.FirstName,
                     LastName = client.User.LastName,
                     PhoneNumber = client.User.PhoneNumber,
                     Email = client.User.Email,
-                    WalletBalance =  client.WalletBalance,
                     DateOfBirth = client.DateOfBirth,
                     State = client.State,
-                    Address = client.Address,
-                    Country = client.Country,
                     Gender = client.Gender,
                 }
             };
         }
 
-        public async Task<IEnumerable<ClientDto>> GetAllClient()
+        public async Task<IEnumerable<ClientDto>> GetAll()
         {
             var clients = await _clientRepository.GetAll();
             var listOfClients = clients.Select(a => new ClientDto
             {
-                Id = Guid.NewGuid(),
+                Id = a.Id,
                 UserId = a.UserId,
                 FirstName = a.User.FirstName,
                 LastName = a.User.LastName,
                 Email = a.User.Email,
                 PhoneNumber = a.User.PhoneNumber,
-                DateOfBirth= a.DateOfBirth,
-                Address = a.Address,
-                Country = a.Country,
+                DateOfBirth = a.DateOfBirth,
                 State = a.State,
-                Gender = a.Gender,
-                WalletBalance = a.WalletBalance,
             }).ToList();
             return listOfClients;
         }
 
         public async Task<BaseResponse<ClientDto>> Update(Guid id, UpdateClientRequestModel model)
         {
+            var request = new WhatsappMessageSenderRequestModel { ReciprantNumber = model.PhoneNumber, MessageBody = "Client edited successfully" };
+            await _notificationMessage.SendWhatsappMessageAsync(request);
+
             var client = await _clientRepository.GetClient(id);
             if (client == null) return new BaseResponse<ClientDto>
             {
@@ -160,15 +165,10 @@ namespace My_Final_Project.Implementations.Services
 
             client.User.FirstName = model.FirstName;
             client.User.LastName = model.LastName;
-            client.User.Password = model.Password;
-            client.User.Email = model.Password;
+            client.User.Email = model.Email;
             client.User.PhoneNumber = model.PhoneNumber;
-            client.WalletBalance = model.WalletBalance;
-            client.Address = model.Address;
-            client.Country = model.Country;
             client.DateOfBirth = model.DateOfBirth;
             client.State = model.State;
-            client.Gender = model.Gender;
             client.DateCreated = DateTime.Now;
             client.DateUpdated = DateTime.Now;
             client.IsDeleted = false;
@@ -185,6 +185,18 @@ namespace My_Final_Project.Implementations.Services
                     LastName = client.User.LastName,
                 }
             };
+        }
+
+        public async Task<List<UserDto>> GetAllClientByChat()
+        {
+            var clients = await _clientRepository.GetAll();
+            var listOfClients = clients.Select(a => new UserDto
+            {
+                Id = a.Id,
+                FirstName = a.User.FirstName,
+                LastName = a.User.LastName,
+            }).ToList();
+            return listOfClients;
         }
     }
 }

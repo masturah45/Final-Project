@@ -1,0 +1,61 @@
+﻿@model IEnumerable<My_Final_Project.Models.DTOs.TherapistDto>
+
+<div class="container p-3">
+
+    <div class="row pt-4">
+
+        <div class="col-6">
+
+            <h2 calss="text-primary">Available Therapist</h2>
+
+        </div>
+
+        <div>
+            <table class="table table-bordered table-striped" style="width:100%">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            FirstName
+                        </th>
+
+                        <th>
+                            LastName
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                @foreach (var therapist in Model)
+                {
+                    <tr>
+                        <th>
+                            @therapist.FirstName
+                        </th>
+
+                        <th>
+                            @therapist.LastName
+                        </th>
+
+                        <th>
+                            @therapist.Email
+                        </th>
+                    </tr>
+
+                    <td>
+                        <a asp-controller="Therapist" asp-action="GetAvailable" asp-route-Id="@therapist.Id"><i class="bi bi-pencil-fill"></i>ViewAll</a>
+                    </td>
+                }
+
+            </table>
+        </div>
+
+    </div>
+</div>

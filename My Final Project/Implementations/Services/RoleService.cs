@@ -57,7 +57,7 @@ namespace My_Final_Project.Implementations.Services
                 Status = false,
             };
 
-            //_roleRepository.Save();
+            //_roleRepository.Save()
 
             return new BaseResponse<RoleDto>
             {
@@ -121,7 +121,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<RoleDto>> GetRoleByName(string name)
         {
-            var role = await _roleRepository.GetRoleByName(name);
+            var role =  _roleRepository.GetRoleByName(name);
             if (role == null) return new BaseResponse<RoleDto>
             {
                 Message = "role not found",

@@ -1,43 +1,200 @@
-﻿@using My_Final_Project.Models.Enum
-@model My_Final_Project.Models.DTOs.CreateTherapistRequestModel
-@{
-    ViewData["Title"] = "Therapist Registration";
+﻿@model My_Final_Project.Models.DTOs.CreateTherapistRequestModel
+@using My_Final_Project.Models.Enum
+@using System.ComponentModel.DataAnnotations
+
+<h1>Therapist Registration</h1>
+
+<partial name="_Notification" />
+
+
+     @*<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+    <title>Document</title>
+    </head>
+
+    <body>*@
+        <section class="vh-70" style="background-color: #2779e2; overflow-y: scroll;">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-80">
+                    <div class="col-xl-9">
+
+                        <h4 class="text-white mb-4 text-center">Add a new Therapist</h4>
+
+                        <div class="card" style="border-radius: 15px;">
+                            <form asp-action="Create" class="forms" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                <div class="card-body">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+
+                                    <div class="row align-items-center pt-4 pb-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">First Name</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input asp-for="FirstName" type="text" class="form-control form-control-lg" id="firstname" name="FirstName" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center pt-4 pb-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">Last Name</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input asp-for="LastName" type="text" class="form-control form-control-lg" id="lastname" name="LastName" />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center pt-4 pb-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">UserName</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input asp-for="UserName" type="text" class="form-control form-control-lg" id="username"name="UserName" />
+                                            <span asp-validation-for="UserName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center pt-4 pb-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">PhoneNumber</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input asp-for="PhoneNumber" type="number" class="form-control form-control-lg" id="phonenumber" name="PhoneNumber" />
+@*                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>*@
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center pt-4 pb-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">Email</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input asp-for="Email" type="email" class="form-control form-control-lg" id="email" name="Email" />
+@*                                            <span asp-validation-for="Email" class="text-danger"></span>*@
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center pt-4 pb-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">PassWord</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input asp-for="Password" type="password" class="form-control form-control-lg" id="password" name="Password" />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center pt-4 pb-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">RegNo</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input asp-for="RegNo" type="text" class="form-control form-control-lg" id="regno" maxlength="15" name="RegNo" />
+                                            <span asp-validation-for="RegNo" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="row align-items-center pt-4 pb-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">Gender</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <select id="gender" asp-for="Gender" asp-items="@Html.GetEnumSelectList(typeof(Gender))" placeholder="Gender"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center pt-4 pb-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">Description</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input asp-for="Description" id="description" type="text" class="form-control form-control-lg" name="Description" />
+                                            <span asp-validation-for="Description" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center pt-4 pb-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">Issues: </h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <select asp-for="IssueIds" asp-items="@Model.Issues" id="IssueId" class="form-select" multiple>
+                                                <option disabled selected>--Select Issues--</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-9 pe-5">
+
+                                        <input class="form-control form-control-lg" id="formFileLg" type="file" name="Certificate" multiple />
+                                        <div class="small text-muted mt-2">
+                                            Upload your Therapist Certificate
+                                            Max file
+                                            size 50 MB
+                                        </div>
+
+                                    </div>
+                                    <hr class="mx-n3">
+
+                                    <div class="col-md-9 pe-5">
+
+                                        <input class="form-control form-control-lg" id="formFileLg" type="file" name="ProfilePicture" multiple />
+                                        <div class="small text-muted mt-2">
+                                            Upload your Therapist PicturePicture
+                                            Max file
+                                            size 50 MB
+                                        </div>
+
+                                    </div>
+                                    <hr class="mx-n3">
+
+                                    <div class="col-md-9 pe-5">
+
+                                        <input class="form-control form-control-lg" id="formFileLg" type="file" name="Credential" multiple />
+                                        <div class="small text-muted mt-2">
+                                            Upload your Therapist Credential
+                                            Max file
+                                            size 50 MB
+                                        </div>
+
+                                    </div>
+                                    <hr class="mx-n3">
+
+                                    <div style="margin-bottom:auto">
+                                        <input type="submit" value="Register" class="btn-primary" id="form-submit" onsubmit="formValidation()">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        @section Scripts {
+        @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        }
+
+            @*   <!-- MDB -->
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
+            <script src="~/js/site.js"></script>
+            </body>
+
+            </html>*@
 }
 
-<h5>REGISTRATION</h5>
-
-<fieldset>
-    <form asp-action="Create" method="post" class="forms" enctype="multipart/form-data">
-        <div class="input">
-            <div style="margin-bottom:auto">
-                <label for="FirstName">FirstName</label><br>
-                <input type="text" placeholder="Enter your FirstName" name="FirstName" id="trans">
-            </div>
-
-            <div style="margin-bottom:auto">
-                <label for="LastName">LastName</label><br />
-                <input type="text" placeholder="Enter your LastName" name="LastName" id="trans"/>
-            </div>
-
-            <div style="margin-bottom:2%">
-                <label for="PhoneNumber">PhoneNumber</label><br />
-                <input  type="number" placeholder="Enter your PhoneNumber" name="PhoneNumber" id="trans"/>
-            </div>
-
-            <div style="margin-bottom:auto">
-                <label for="Email">Email</label><br />
-                <input type="email" placeholder="Enter your verified email" name="Email" id="trans"/>
-            </div>
-
-            <div style="margin-bottom:auto">
-                <label for="Password">Password</label><br />
-                <input type="password" placeholder="Enter your Password" name="Password" id="trans"/>
-            </div>
-
-            <div style="margin-bottom:2%">
-                <input type="submit" value="Register" id="form-submit">
-            </div>
-        </div>
-
-    </form>
-</fieldset>
