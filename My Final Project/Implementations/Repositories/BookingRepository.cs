@@ -12,6 +12,12 @@ namespace My_Final_Project.Implementations.Repositories
         {
             _context = context;
         }
+
+        //public async Task<Booking> CancelBooking()
+        //{
+        //    return await _context.Bookings.Where(x.I)
+        //}
+
         public async Task<IEnumerable<Booking>> GetAll()
         {
             return await _context.Bookings.Where(x => !x.IsDeleted).ToListAsync();
@@ -19,7 +25,7 @@ namespace My_Final_Project.Implementations.Repositories
 
         public async Task<Booking> GetBooking(Guid TherapistId)
         {
-            return await _context.Bookings.FirstOrDefaultAsync(a => a.TherapistId == TherapistId);
+            return await _context.Bookings.Where(x => !x.IsDeleted).FirstOrDefaultAsync(a => a.TherapistId == TherapistId);
         }
 
         public async Task<Booking> GetBooking(Expression<Func<Booking, bool>> expression)

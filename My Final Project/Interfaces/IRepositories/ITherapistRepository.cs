@@ -12,6 +12,7 @@ namespace My_Final_Project.Interfaces.IRepositories
         Task<IEnumerable<Therapist>> GetAllTherapist();
         Task<IEnumerable<Therapist>> GetUnapprovedTherapist();
         Task<IEnumerable<Therapist>> GetApprovedTherapist();
+        Task<IEnumerable<Therapist>> GetRejectedTherapist();
         Task<IEnumerable<Therapist>> GetAvailableTherapist();
         Task<List<Therapist>> GetAllTherapistByChat();
     }

@@ -111,10 +111,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/ApprovedTherapist.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEFwcHJvdmVkVGhlcmFwaXN0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -143,16 +139,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XFByb2ZpbGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/RejectTherapist.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XFJlamVjdFRoZXJhcGlzdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/ViewApprovedTherapist.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XFZpZXdBcHByb3ZlZFRoZXJhcGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/ViewRejectedTherapist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XFZpZXdSZWplY3RlZFRoZXJhcGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/ViewUnApprovedTherapist.cshtml]

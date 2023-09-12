@@ -52,7 +52,7 @@ namespace My_Final_Project.Implementations.Services
                 Gender = model.Gender,
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,
-                IsDeleted = false,
+                IsDeleted = true,
 
                 UserRoles = new List<UserRole>()
             };
@@ -353,6 +353,7 @@ namespace My_Final_Project.Implementations.Services
                 Status = false,
             };
             therapist.Status = Aprrove.Approved;
+            therapist.IsDeleted = false;
             await _therapistRepository.save();
 
             return new BaseResponse<TherapistDto>
@@ -370,6 +371,33 @@ namespace My_Final_Project.Implementations.Services
                     Credential = therapist.Credential,
                 }
 
+            };
+        }
+
+        public async Task<BaseResponse<IEnumerable<TherapistDto>>> ViewRejectedTherapist()
+        {
+            var therapist = await _therapistRepository.GetRejectedTherapist();
+            if (therapist == null) return new BaseResponse<IEnumerable<TherapistDto>>
+            {
+                Message = "Therapist not found",
+                Status = false,
+            };
+            var listOftherapists = therapist.Select(a => new TherapistDto
+            {
+                Id = a.Id,
+                UserId = a.UserId,
+                FirstName = a.User.FirstName,
+                LastName = a.User.LastName,
+                PhoneNumber = a.User.PhoneNumber,
+                Certificate = a.Certificate,
+                RegNo = a.RegNo,
+                Credential = a.Credential,
+            }).ToList();
+            return new BaseResponse<IEnumerable<TherapistDto>>
+            {
+                Message = "Successful",
+                Status = true,
+                Data = listOftherapists
             };
         }
     }

@@ -29,13 +29,13 @@ namespace My_Final_Project.Models.DTOs
         [StringLength(20, MinimumLength = 8, ErrorMessage = "{0} should be between 8 to 20 Char")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        [RegularExpression("/[A-Z]/[a-z]/", ErrorMessage = "PhoneNumber does not exist")]
+        [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
-        [RegularExpression("/A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)Z/", ErrorMessage = "Invalid Email Id")]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
         public Gender Gender { get; set; }

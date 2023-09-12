@@ -116,7 +116,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<UserDto>> Login(LogInUserRequestModel model)
         {
-            var user = await _userRepository.Get(a => a.Email == model.Email && a.Password == model.Password);
+            var user = await _userRepository.Get(a => a.Email == model.Email && a.Password == model.Password && a.IsDeleted == false);
             dynamic us = null;
             if(user.Client!=null)
             {

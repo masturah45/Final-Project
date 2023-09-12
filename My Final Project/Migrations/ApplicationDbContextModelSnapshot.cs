@@ -52,6 +52,9 @@ namespace My_Final_Project.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsApproved")
                         .HasColumnType("tinyint(1)");
 
@@ -76,14 +79,14 @@ namespace My_Final_Project.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("char(36)");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
@@ -96,15 +99,16 @@ namespace My_Final_Project.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<Guid>("RecieverId")
+                        .HasColumnType("char(36)");
+
                     b.Property<bool>("Seen")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid>("TherapistId")
+                    b.Property<Guid>("SenderId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
 
                     b.ToTable("Chats");
                 });
@@ -126,6 +130,9 @@ namespace My_Final_Project.Migrations
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
@@ -161,6 +168,9 @@ namespace My_Final_Project.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
@@ -189,6 +199,9 @@ namespace My_Final_Project.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
@@ -212,6 +225,9 @@ namespace My_Final_Project.Migrations
 
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
@@ -250,6 +266,9 @@ namespace My_Final_Project.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsAvalaible")
                         .HasColumnType("tinyint(1)");
@@ -300,6 +319,9 @@ namespace My_Final_Project.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
@@ -341,6 +363,9 @@ namespace My_Final_Project.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
@@ -372,6 +397,9 @@ namespace My_Final_Project.Migrations
 
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
@@ -423,17 +451,6 @@ namespace My_Final_Project.Migrations
                     b.Navigation("Client");
 
                     b.Navigation("Therapist");
-                });
-
-            modelBuilder.Entity("My_Final_Project.Models.Entities.Chat", b =>
-                {
-                    b.HasOne("My_Final_Project.Models.Entities.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("My_Final_Project.Models.Entities.Client", b =>

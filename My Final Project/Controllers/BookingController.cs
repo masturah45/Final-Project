@@ -47,9 +47,9 @@ namespace My_Final_Project.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Update(Guid id)
+        public async Task<IActionResult> Update(Guid Therapistid)
         {
-            var booking = await _bookingService.GetBooking(id);
+            var booking = await _bookingService.GetBooking(Therapistid);
             if (booking == null)
             {
                 ViewBag.Error = "Booking doesnt exist";
@@ -59,17 +59,17 @@ namespace My_Final_Project.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Update(Guid id, UpdateBookingRequestModel model)
+        public async Task<IActionResult> Update(Guid Therapistid, UpdateBookingRequestModel model)
         {
-            await _bookingService.Update(id, model);
+            await _bookingService.Update(Therapistid, model);
             TempData["success"] = "Booking updated successfully";
             return RedirectToAction("GetAll", "Booking");
         }
 
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid Therapistid)
         {
 
-            var booking = await _bookingService.GetBooking(id);
+            var booking = await _bookingService.GetBooking(Therapistid);
             if (booking == null)
             {
                 ViewBag.Error = "doesnt exist";
@@ -79,7 +79,7 @@ namespace My_Final_Project.Controllers
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             await _bookingService.Delete(id);
-            TempData["error"] = "Booking deleted Sucessfully";
+            TempData["error"] = "It has successfully been unbooked";
             return RedirectToAction("GetAll", "Booking");
         }
         [HttpGet]

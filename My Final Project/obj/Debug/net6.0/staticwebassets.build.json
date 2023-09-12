@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9VtDfmiIaAEA/pVvdwJgaaVir0edTFHDSdJ644jT4Yo=",
+  "Hash": "oMr2McydMcD2lskkcG8x+n62IPyf9P+8/G5n3aVVGZM=",
   "Source": "My Final Project",
   "BasePath": "_content/My Final Project",
   "Mode": "Default",
@@ -2244,6 +2244,23 @@
       "OriginalItemSpec": "wwwroot\\Documents\\1f9eb668-image26.jpeg"
     },
     {
+      "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\233d02f3-image25.jpg",
+      "SourceId": "My Final Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\",
+      "BasePath": "_content/My Final Project",
+      "RelativePath": "Documents/233d02f3-image25.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\233d02f3-image25.jpg"
+    },
+    {
       "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\29854c34-CLH SCHEDULE 2023 - January.pdf",
       "SourceId": "My Final Project",
       "SourceType": "Discovered",
@@ -2259,6 +2276,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Documents\\29854c34-CLH SCHEDULE 2023 - January.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\2cdde911-image22.jpg",
+      "SourceId": "My Final Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\",
+      "BasePath": "_content/My Final Project",
+      "RelativePath": "Documents/2cdde911-image22.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\2cdde911-image22.jpg"
     },
     {
       "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\2f1033f1-image27.webp",
@@ -2599,6 +2633,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Documents\\4a2a2ab7-hangfire.html"
+    },
+    {
+      "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\4cbb56a8-image22.jpg",
+      "SourceId": "My Final Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\",
+      "BasePath": "_content/My Final Project",
+      "RelativePath": "Documents/4cbb56a8-image22.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\4cbb56a8-image22.jpg"
     },
     {
       "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\4d5d7378-8be100ef7c0050ae8a38d040a2828fd3.jpg",
@@ -3196,6 +3247,23 @@
       "OriginalItemSpec": "wwwroot\\Documents\\84d3f529-pexels-ricardo-esquivel-1907785.jpg"
     },
     {
+      "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\8578a7ac-imag23.jpg",
+      "SourceId": "My Final Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\",
+      "BasePath": "_content/My Final Project",
+      "RelativePath": "Documents/8578a7ac-imag23.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\8578a7ac-imag23.jpg"
+    },
+    {
       "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\889ed851-8be100ef7c0050ae8a38d040a2828fd3.jpg",
       "SourceId": "My Final Project",
       "SourceType": "Discovered",
@@ -3655,6 +3723,23 @@
       "OriginalItemSpec": "wwwroot\\Documents\\bb185b8c-8be100ef7c0050ae8a38d040a2828fd3.jpg"
     },
     {
+      "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\c3011227-certificate1.html",
+      "SourceId": "My Final Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\",
+      "BasePath": "_content/My Final Project",
+      "RelativePath": "Documents/c3011227-certificate1.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\c3011227-certificate1.html"
+    },
+    {
       "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\c4bbd56a-index936f.html",
       "SourceId": "My Final Project",
       "SourceType": "Discovered",
@@ -3806,6 +3891,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Documents\\d641ae16-Screenshot (4).png"
+    },
+    {
+      "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\d811e974-image27.webp",
+      "SourceId": "My Final Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\",
+      "BasePath": "_content/My Final Project",
+      "RelativePath": "Documents/d811e974-image27.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\d811e974-image27.webp"
     },
     {
       "Identity": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\wwwroot\\Documents\\d9737b2e-certificate1.html",

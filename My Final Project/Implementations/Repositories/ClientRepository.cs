@@ -25,21 +25,21 @@ namespace My_Final_Project.Implementations.Repositories
 
         public async Task<List<Client>> GetAllClientByChat()
         {
-            return await _context.Clients.Include(a => a.User).ToListAsync();
+            return await _context.Clients.Include(a => a.User).Where(x => !x.IsDeleted).ToListAsync();
         }
 
         public async Task<Client> GetClient(Guid id)
         {
-            return await _context.Clients.Include(a => a.User).FirstOrDefaultAsync(a => a.Id == id);
+            return await _context.Clients.Include(a => a.User).Where(x => !x.IsDeleted).FirstOrDefaultAsync(a => a.Id == id);
         }
          public async Task<Client> GetClientByIdAsync(Guid id)
         {
-            return await _context.Clients.Include(a => a.User).FirstOrDefaultAsync(a => a.UserId == id);
+            return await _context.Clients.Include(a => a.User).Where(x => !x.IsDeleted).FirstOrDefaultAsync(a => a.UserId == id);
         }
 
         public async Task<Client> GetClient(Expression<Func<Client, bool>> expression)
         {
-            return await _context.Clients.Include(a => a.User).FirstOrDefaultAsync(expression);
+            return await _context.Clients.Include(a => a.User).Where(x => !x.IsDeleted).FirstOrDefaultAsync(expression);
         }
     }
 }

@@ -65,9 +65,9 @@ namespace My_Final_Project.Implementations.Services
             };
         }
 
-        public async Task<BaseResponse<BookingDto>> Delete(Guid id)
+        public async Task<BaseResponse<BookingDto>> Delete(Guid Therapistid)
         {
-            var booking = await _bookingRepository.Get(id);
+            var booking = await _bookingRepository.GetBooking(Therapistid);
             if (booking == null) return new BaseResponse<BookingDto>
             {
                 Message = "Booking Not Found",
@@ -105,7 +105,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<BookingDto>> GetBooking(Guid TherapistId)
         {
-            var booking = await _bookingRepository.Get(TherapistId);
+            var booking = await _bookingRepository.GetBooking(TherapistId);
             if (booking == null) return new BaseResponse<BookingDto>
             {
                 Message = "Booking Not Found",
@@ -125,9 +125,9 @@ namespace My_Final_Project.Implementations.Services
             };
         }
 
-        public async Task<BaseResponse<BookingDto>> Update(Guid id, UpdateBookingRequestModel model)
+        public async Task<BaseResponse<BookingDto>> Update(Guid Therapistid, UpdateBookingRequestModel model)
         {
-            var booking = await _bookingRepository.Get(id);
+            var booking = await _bookingRepository.GetBooking(Therapistid);
             if (booking == null) return new BaseResponse<BookingDto>
             {
                 Message = "issue not found",

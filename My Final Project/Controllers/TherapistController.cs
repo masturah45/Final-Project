@@ -133,6 +133,16 @@ namespace My_Final_Project.Controllers
             }
             return NotFound();
         }
+        [HttpGet]
+        public async Task<IActionResult> ViewRejectedTherapist()
+        {
+            var therapist = await _therapistService.ViewRejectedTherapist();
+            if(therapist.Status == true)
+            {
+                return View(therapist.Data);
+            }
+            return NotFound();
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAvailable()
@@ -149,11 +159,7 @@ namespace My_Final_Project.Controllers
         public async Task<IActionResult> RejectTherapist(Guid id)
         {
             var therapist = await _therapistService.RejectapprovedTherapist(id);
-            if (therapist.Status == true)
-            {
-                return View();
-            }
-            return View(therapist.Data);
+            return RedirectToAction("ViewUnApprovedTherapist");
         }
 
         [HttpGet]
@@ -161,11 +167,7 @@ namespace My_Final_Project.Controllers
         public async Task<IActionResult> ApprovedTherapist(Guid id)
         {
             var therapist = await _therapistService.Approve(id);
-            if(therapist.Status == true)
-            {
-                return View();
-            }
-            return View(therapist.Data);
+            return RedirectToAction("ViewUnApprovedTherapist");
         }
 
         [HttpGet]

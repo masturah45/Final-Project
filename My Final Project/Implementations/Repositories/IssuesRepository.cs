@@ -19,12 +19,12 @@ namespace My_Final_Project.Implementations.Repositories
 
         public async Task<Issue> GetIssues(Guid id)
         {
-            return await _context.Issues.FirstOrDefaultAsync(a => a.Id == id);
+            return await _context.Issues.Where(x => !x.IsDeleted).FirstOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<Issue> GetIssues(Expression<Func<Issue, bool>> expression)
         {
-            return await _context.Issues.SingleOrDefaultAsync(expression);
+            return await _context.Issues.Where(x => !x.IsDeleted).SingleOrDefaultAsync(expression);
         }
     }
 }
