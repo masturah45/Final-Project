@@ -61,9 +61,9 @@ namespace My_Final_Project.Implementations.Services
             {
                 Id = Guid.NewGuid(),
                 UserId = user.Id,
-                RoleId = role.Id,
+                RoleId = role.Id, 
                 Role = role,
-                User = user,
+                
             };
 
             var certificatefile = await _fileManager.UploadFileToSystem(model.Certificate);
@@ -79,10 +79,8 @@ namespace My_Final_Project.Implementations.Services
                 ProfilePicture = profilepicturefile.Data.Name,
                 UserName = model.UserName,
                 RegNo = model.RegNo,
-                Description = model.Description,
-                User = user,
-                UserId = user.Id,
-                TherapistIssues = issues,
+                Description = model.Description, 
+                UserId = user.Id, 
             };
             foreach (var item in model.IssueIds)
             {
@@ -92,8 +90,7 @@ namespace My_Final_Project.Implementations.Services
                     Id = Guid.NewGuid(),
                     Issue = issue,
                     IssueId = item,
-                    TherapistId = therapist.Id, 
-                    Therapist=therapist,
+                    TherapistId = therapist.Id,  
                 };
                 issues.Add(therapistIssue);
             }
