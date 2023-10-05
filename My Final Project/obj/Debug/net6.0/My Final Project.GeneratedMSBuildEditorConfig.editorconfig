@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\ADESANYA\source\repos\Final Project\My Final Project
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Booking/Cancel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xDYW5jZWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Booking/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -61,6 +65,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Client/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Home/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Home/Index.cshtml]
@@ -123,12 +131,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEdldEFsbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/GetAllTherapist.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEdldEFsbFRoZXJhcGlzdC5jc2h0bWw=
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/GetAllAvailableTherapist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEdldEFsbEF2YWlsYWJsZVRoZXJhcGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/GetAvailable.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEdldEF2YWlsYWJsZS5jc2h0bWw=
+[C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/GetAllTherapist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEdldEFsbFRoZXJhcGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADESANYA/source/repos/Final Project/My Final Project/Views/Therapist/GetTherapistByIssues.cshtml]

@@ -47,7 +47,7 @@ namespace My_Final_Project.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-        public async Task<IActionResult> Chat(Guid id, CreateChatRequestModel model)
+        public async Task<IActionResult> Chat([FromRoute]Guid id, CreateChatRequestModel model)
         {
             var role = HttpContext.User.FindFirst(ClaimTypes.Role)?.Value;
             if (HttpContext.Request.Method == "POST")

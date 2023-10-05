@@ -1,4 +1,6 @@
-﻿@model IEnumerable<My_Final_Project.Models.DTOs.ChatDto>
+﻿@using Microsoft.AspNetCore.Identity
+@using My_Final_Project.Models.Entities
+@model IEnumerable<My_Final_Project.Models.DTOs.ChatDto>
  @{
     Layout = null;
 }
@@ -58,7 +60,7 @@
                 </div>
                 <form asp-action="Chat">
                     <div class="user-input">
-                        <input type="text" for="Message" placeholder="Type your message...." name="Message">
+                        <input type="text" for="Message" placeholder="Type your message...." name="Message" required>
                         <input type="submit" value="SEND" class="btn-primary">
                     </div>
                 </form>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<My_Final_Project.Models.DTOs.TherapistDto>
+<partial name="_Notification" />
+@{
+    //Layout = null;
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">UI Elements /</span> Cards Basic</h4>
+
+
+
+    <h5 class="pb-1 mb-4">All Therapist</h5>
+    <div class="row mb-5">
+        @foreach (var therapist in Model)
+        {
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3">
+                    <img class="card-img-top" src="~/Documents/@therapist.ProfilePicture" alt="Card image cap" />
+                    <div class="card-body">
+                        <h5 class="card-title">@therapist.FirstName @therapist.LastName </h5>
+                        <h5 class="card-title">
+                            @foreach (var item in therapist.TherapistIssues)
+                            {
+                                <span>  @item.Issue.Name ,  </span>
+                            }
+                        </h5>
+                        <p class="card-text">
+                            @therapist.RegNo @therapist.PhoneNumber
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">@therapist.Issues </small>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">@therapist.Description </small>
+                        </p>
+                        <th>
+                            <a asp-controller="Booking" asp-action="Create" asp-route-therapistId="@therapist.Id" class="btn btn-warning"><i class="bi bi-pencil-fill"></i>Book</a>
+                        </th>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <!--/ Images -->
+</div>
+<div class="content-backdrop fade"></div>

@@ -52,7 +52,7 @@ namespace My_Final_Project.Implementations.Services
                 Gender = model.Gender,
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,
-                IsDeleted = true,
+                IsDeleted = false,
 
                 UserRoles = new List<UserRole>()
             };
@@ -176,6 +176,7 @@ namespace My_Final_Project.Implementations.Services
                 Password = a.User.Password,
                 RegNo = a.RegNo,
                 Certificate = a.Certificate,
+                IsAvailable = a.IsAvalaible,
                 Credential = a.Credential,
                 ProfilePicture = a.ProfilePicture,
                 PhoneNumber = a.User.PhoneNumber,
@@ -303,29 +304,19 @@ namespace My_Final_Project.Implementations.Services
 
         }
 
-        public async Task<BaseResponse<IEnumerable<TherapistDto>>> GetAvailableTherapist()
+        public async Task<IEnumerable<TherapistDto>> GetAllAvailableTherapist()
         {
-            var therapist = await _therapistRepository.GetAvailableTherapist();
-            if (therapist == null) return new BaseResponse<IEnumerable<TherapistDto>>
-            {
-                Message = "Therapist not found",
-                Status = false,
-            };
-
-            var listOftherapists = therapist.Select(a => new TherapistDto
+            var therapists = await _therapistRepository.GetAllAvailableTherapist();
+            var listOftherapists = therapists.Select(a => new TherapistDto
             {
                 Id = a.Id,
-                UserId = a.UserId,
+                //UserId = a.UserId,
                 FirstName = a.User.FirstName,
                 LastName = a.User.LastName,
                 Email = a.User.Email,
+                RegNo = a.RegNo,
             }).ToList();
-            return new BaseResponse<IEnumerable<TherapistDto>>
-            {
-                Message = "Successful",
-                Status = true,
-                Data = listOftherapists
-            };
+            return listOftherapists;
         }
 
         public async Task<List<UserDto>> GetAllTherapistByChat()
@@ -333,7 +324,7 @@ namespace My_Final_Project.Implementations.Services
             var therapists = await _therapistRepository.GetAllTherapist();
             var listOfTherapists = therapists.Select(a => new UserDto
             {
-                Id = a.Id,
+                Id = a.UserId,
                 FirstName = a.User.FirstName,
                 LastName = a.User.LastName,
             }).ToList();

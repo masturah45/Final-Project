@@ -3,6 +3,7 @@ using My_Final_Project.Interfaces.IRepositories;
 using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
 using My_Final_Project.Models.Entities;
+using System;
 using System.Data;
 using System.Text.Json.Serialization;
 
@@ -78,7 +79,8 @@ namespace My_Final_Project.Implementations.Services
                 Message = "Successfully",
                 Data = new UserDto
                 {
-                    Id = Guid.NewGuid(),
+                    Id = user.Id,
+                    //Id = Guid.NewGuid(),
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
@@ -86,7 +88,8 @@ namespace My_Final_Project.Implementations.Services
 
                     Roles = user.UserRoles.Select(a => new RoleDto
                     {
-                        Id = Guid.NewGuid(),
+                        Id = user.Id,
+                        //Id = Guid.NewGuid(),
                         Name = a.Role.Name,
                         Description = a.Role.Description,
                     }).ToList(),
@@ -116,49 +119,91 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<UserDto>> Login(LogInUserRequestModel model)
         {
-            var user = await _userRepository.Get(a => a.Email == model.Email && a.Password == model.Password && a.IsDeleted == false);
+            var userlogin = await _userRepository.Get(a => a.Email == model.Email && a.Password == model.Password && a.IsDeleted == false);
+           
             dynamic us = null;
-            if(user.Client!=null)
+            if (userlogin.Client != null)
             {
-                us = await _client.GetClient(a => a.UserId == user.Id);
+                us = await _client.GetClient(a => a.UserId == userlogin.Id);
             }
-            if(user.Therapist!=null)
+            if (userlogin.Therapist != null)
             {
-                us = await _theraphy.GetTherapist(a => a.UserId == user.Id);
+                us = await _theraphy.GetTherapist(a => a.UserId == userlogin.Id);
+            }
+            if (userlogin.SuperAdmin != null)
+            {
+                us = await _superAdmin.GetSuperAdmin(a => a.UserId == userlogin.Id);
+            }
+            if (userlogin != null)
+            {
+
+                return new BaseResponse<UserDto>
+                {
+                    Message = "Login Successful",
+                    Status = true,
+                    Data = new UserDto
+                    {
+                        Id = userlogin.Id,
+                        FirstName = userlogin.FirstName,
+                        LastName = userlogin.LastName,
+                        Email = userlogin.Email,
+                        PhoneNumber = userlogin.PhoneNumber,
+
+                        Roles = userlogin.UserRoles.Select(a => new RoleDto
+                        {
+                            Id = Guid.NewGuid(),
+                            Name = a.Role.Name,
+                            Description = a.Role.Description,
+                        }).ToList(),
+                    }
+
+                };
 
             }
-            if(user.SuperAdmin!=null)
+            else
             {
-                us = await _superAdmin.GetSuperAdmin(a => a.UserId == user.Id);
+
+                return new BaseResponse<UserDto>
+                {
+                    Message = "incorrect details",
+                    Status = false,
+                };
+               
             }
-           
+
+        }
+
+        public async Task<BaseResponse<UserDto>> Get(string name)
+        {
+            var user = await _userRepository.Get(name);
             if (user == null) return new BaseResponse<UserDto>
             {
-                Message = "incorrect details",
+                Message = "User not found",
                 Status = false,
             };
-
             return new BaseResponse<UserDto>
             {
-                Message = "Login Successful",
                 Status = true,
+                Message = "Successfully",
                 Data = new UserDto
                 {
                     Id = user.Id,
-                    Id2 = us.Id,
+                    //Id = Guid.NewGuid(),
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
-                    PhoneNumber = user.PhoneNumber,
+                    Password = user.Password,
 
                     Roles = user.UserRoles.Select(a => new RoleDto
                     {
-                        Id = Guid.NewGuid(),
+                        Id = user.Id,
+                        //Id = Guid.NewGuid(),
                         Name = a.Role.Name,
                         Description = a.Role.Description,
                     }).ToList(),
                 }
             };
+
         }
     }
 }

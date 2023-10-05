@@ -65,7 +65,8 @@ namespace My_Final_Project.Implementations.Services
             var client = new Client
             {
                 User = user,
-                UserId = Guid.NewGuid(),
+                UserId = userRole.UserId,
+                //UserId = Guid.NewGuid(),
                 State = model.State,
                 DateOfBirth = model.DateOfBirth,
                 Gender = model.Gender,
@@ -192,7 +193,7 @@ namespace My_Final_Project.Implementations.Services
             var clients = await _clientRepository.GetAll();
             var listOfClients = clients.Select(a => new UserDto
             {
-                Id = a.Id,
+                Id = a.UserId,
                 FirstName = a.User.FirstName,
                 LastName = a.User.LastName,
             }).ToList();

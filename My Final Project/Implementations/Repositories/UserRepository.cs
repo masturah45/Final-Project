@@ -39,5 +39,13 @@ namespace My_Final_Project.Implementations.Repositories
                 .FirstOrDefaultAsync(expression);
             return await user;
         }
+
+        public async Task<User> Get(string name)
+        {
+            return await _context.Users
+                .Include(u => u.UserRoles)
+                .ThenInclude(u => u.Role)
+                .FirstOrDefaultAsync(x => x.FirstName == name);
+        }
     }
 }

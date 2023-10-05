@@ -20,7 +20,7 @@ namespace My_Final_Project.Implementations.Repositories
             return await _context.Therapists.Where(e => e.User.Email.Equals(email)).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Therapist>> GetAvailableTherapist()
+        public async Task<IEnumerable<Therapist>> GetAllAvailableTherapist()
         {
             return await _context.Therapists.Where(x => x.IsAvalaible == true).ToListAsync();
         }
@@ -62,5 +62,6 @@ namespace My_Final_Project.Implementations.Repositories
         {
             return await _context.Therapists.Where(x => x.Status == Aprrove.Rejected && !x.IsDeleted).Include(a => a.User).ToListAsync();   
         }
+
     }
 }

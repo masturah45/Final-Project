@@ -21,6 +21,26 @@ namespace My_Final_Project.Implementations.Services
             _notificationMessage = notificationMessage;
         }
 
+        public async Task<BaseResponse<BookingDto>> CancelBooking(Guid TherapistId)
+        {
+            var booking = await _bookingRepository.GetBooking(TherapistId);
+            if (booking == null || booking.IsDeleted) return new BaseResponse<BookingDto>
+            {
+                Message = "Booking has already been cancelled",
+                Status = false
+            };
+
+            booking.IsDeleted = true;
+
+            await _bookingRepository.save();
+
+            return new BaseResponse<BookingDto>
+            {
+                Message = "Booking Cancelled Successfully",
+                Status = true,
+            };
+        }
+
         public async Task<BaseResponse<BookingDto>> Create(CreateBookingRequestModel model, Guid userId)
         {
             var request = new WhatsappMessageSenderRequestModel { ReciprantNumber = "+2347054770135", MessageBody = "Created Successfully" };
@@ -49,10 +69,17 @@ namespace My_Final_Project.Implementations.Services
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,
                 IsDeleted = false,
-                IsApproved = false,
+                
+               // IsApproved = false,
             };
-
+            
             await _bookingRepository.Add(booking);
+            var that = new Therapist
+            {
+                IsAvalaible = false,
+            };
+            await _therapistRepository.Update(that);
+
 
             return new BaseResponse<BookingDto>
             {
@@ -93,7 +120,6 @@ namespace My_Final_Project.Implementations.Services
                 ClientId = b.ClientId,
                 TherapistId = b.TherapistId,
                 AppointmentDateTime = b.AppointmentDateTime,
-                IsApproved = b.IsApproved,
             });
             return new BaseResponse<IEnumerable<BookingDto>>
             {

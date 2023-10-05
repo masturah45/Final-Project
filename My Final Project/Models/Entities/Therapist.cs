@@ -20,7 +20,8 @@ namespace My_Final_Project.Models.Entities
         public IList<Booking> Bookings { get; set; }
         public Aprrove Status { get; set; } = Aprrove.Pending;
         public IList<TherapistIssue> TherapistIssues { get; set; }
-        public bool IsAvalaible { get; set; } = false;
+        public bool IsAvalaible { get; set; } = true;
+        public bool IsActive { get; set; } = false;
         public IList<Client> Clients { get; set; }
     }
 }

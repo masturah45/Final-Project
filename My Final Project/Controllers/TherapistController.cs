@@ -50,7 +50,7 @@ namespace My_Final_Project.Controllers
                 }
                 var responde = await _therapistService.Create(model);
                 TempData["success"] = "Therapist Created Successfully";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home=");
         }
 
         [HttpGet]
@@ -145,21 +145,18 @@ namespace My_Final_Project.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAvailable()
+        public async Task<IActionResult> GetAllAvailableTherapist()
         {
-            var therapist = await _therapistService.GetAvailableTherapist();
-            if (therapist.Status == true)
-            {
-                return View(therapist.Data);
-            }
-            return NotFound();
+            var therapists = await _therapistService.GetAllAvailableTherapist();
+            TempData["success"] = "All Available Therapist";
+            return View(therapists);
         }
 
         [HttpGet]
         public async Task<IActionResult> RejectTherapist(Guid id)
         {
             var therapist = await _therapistService.RejectapprovedTherapist(id);
-            return RedirectToAction("ViewUnApprovedTherapist");
+            return RedirectToAction("User", "SuperAdminBoard");
         }
 
         [HttpGet]
@@ -167,7 +164,7 @@ namespace My_Final_Project.Controllers
         public async Task<IActionResult> ApprovedTherapist(Guid id)
         {
             var therapist = await _therapistService.Approve(id);
-            return RedirectToAction("ViewUnApprovedTherapist");
+            return RedirectToAction("User", "SuperAdminBoard");
         }
 
         [HttpGet]

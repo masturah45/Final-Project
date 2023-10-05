@@ -13,6 +13,7 @@ namespace My_Final_Project.Models.DTOs
         public DateTime AppointmentDateTime { get; set; }
         public SelectList Therapists { get; set; }
         public bool IsApproved { get; set; } = false;
+        public bool IsCancelled { get; set; } = false;
     }
 
     public class CreateBookingRequestModel

@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace My_Final_Project.Models.Entities
 {
-    public class User : BaseEntity
+    public class User : IdentityUser
     {
         [Required(ErrorMessage = "First Name is required.")]
         public string FirstName { get; set; }

@@ -11,11 +11,13 @@ namespace My_Final_Project.Controllers
     {
         private readonly IBookingService _bookingService;
         private readonly ITherapistService  _therapist;
+        private readonly IUserService _userService;
 
-        public BookingController(IBookingService bookingService, ITherapistService therapist)
+        public BookingController(IBookingService bookingService, ITherapistService therapist, IUserService userService)
         {
             _bookingService = bookingService;
             _therapist = therapist;
+            _userService = userService;
         }
 
         public IActionResult Index()
@@ -27,7 +29,10 @@ namespace My_Final_Project.Controllers
         {
             var requestmodel = new CreateBookingRequestModel
             {
-                TherapistId = TherapistId
+                TherapistId = TherapistId,
+                //AppointmentDateTime = 
+            
+                
             };
 
             return View(requestmodel);
@@ -41,8 +46,8 @@ namespace My_Final_Project.Controllers
             TempData["success"] = "Booking Created Sucessfully";
             if (booking.Status == true)
             {
-                return RedirectToAction("Create", "Booking");
-            }
+                return RedirectToAction("ClientBoard", "User");
+            }   
             return View();
         }
 
@@ -83,8 +88,10 @@ namespace My_Final_Project.Controllers
             return RedirectToAction("GetAll", "Booking");
         }
         [HttpGet]
-        public async Task<IActionResult> Profile(Guid TherapistId)
+        //[Route("Booking/Profile/{TherapistId}")]
+        public async Task<IActionResult> Profile([FromQuery] Guid TherapistId)
         {
+            //var user = _userService.Get(User.Identity.Name).Id;
             var booking = await _bookingService.GetBooking(TherapistId);
             TempData["success"] = "Booking Profile";
             if (booking == null)
@@ -98,6 +105,16 @@ namespace My_Final_Project.Controllers
         {
             var bookings = await _bookingService.GetAll();
             return View(bookings);
+        }
+
+        public async Task<IActionResult> Cancel(Guid ClientId)
+        {
+            var booking = await _bookingService.CancelBooking(ClientId);
+            if(booking == null)
+            {
+                TempData["success"] = "Booking has already been cancelled";
+            }
+            return RedirectToAction("GetAll", "Booking");
         }
     }
 }

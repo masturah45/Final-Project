@@ -6,10 +6,9 @@ namespace My_Final_Project.Interfaces.IRepositories
     public interface IBookingRepository : IBaseRepository<Booking>
     {
         Task<Booking> GetBooking(Guid TherapistId);
-        //Task<Booking> CancelBooking();
+        Task<Booking> CancelBooking(Guid therapistId);
         Task<Booking> GetBooking(Expression<Func<Booking, bool>> expression);
         Task<IEnumerable<Booking>>GetAll();
-        Task<Booking> GetBookingByTherapistId(Guid therapistId);
         Task<Booking> GetBookingByClientId(Guid clientId);
     }
 }

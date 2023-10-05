@@ -5,6 +5,8 @@ using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
 using System.Security.Claims;
 using My_Final_Project.Implementations.Services;
+using My_Final_Project.Implementations.Repositories;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace My_Final_Project.Controllers
 {
@@ -51,7 +53,8 @@ namespace My_Final_Project.Controllers
                      new Claim(ClaimTypes.GivenName , user.Data.Id2.ToString()),
                      new Claim(ClaimTypes.Email, user.Data.Email),
                      new Claim(ClaimTypes.HomePhone, user.Data.PhoneNumber),
-                     new Claim(ClaimTypes.Name, user.Data.FirstName + " " + user.Data.LastName),
+                     new Claim(ClaimTypes.Name, user.Data.FirstName),
+                     new Claim(ClaimTypes.Name, user.Data.LastName),
 
 
                 };
@@ -97,6 +100,7 @@ namespace My_Final_Project.Controllers
         {
             var therapists = await _therapistService.GetAll();
             return View(therapists);
+            //return View();
         }
         [HttpGet]
         public IActionResult TherapistBoard()
