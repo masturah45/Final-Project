@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Implementations.Repositories
 {
-    public class SuperAdminRepository : BaseRepository<SuperAdmin> , ISuperAdminRepository
+    public class SuperAdminRepository : BaseRepository , ISuperAdminRepository
     {
         public SuperAdminRepository(ApplicationDbContext context)
         {

@@ -18,7 +18,7 @@ namespace My_Final_Project.Models.DTOs
         public string Credential { get; set; }
         public string RegNo { get; set; }
         public string ProfilePicture { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public bool IsAvailable { get; set; }
         public Gender Gender { get; set; }
         public string Description { get; set; }

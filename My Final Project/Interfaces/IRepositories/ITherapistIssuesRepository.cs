@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Interfaces.IRepositories
 {
-    public interface ITherapistIssuesRepository : IBaseRepository<TherapistIssue>
+    public interface ITherapistIssuesRepository : IBaseRepository
     {
         Task<TherapistIssue> GetTherapistIssues(Guid id);
         Task<TherapistIssue> GetTherapistIssues(Expression<Func<TherapistIssue, bool>> expression);

@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\My Final Project.csproj": {}
+    "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\My Final Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\My Final Project.csproj": {
+    "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\My Final Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\My Final Project.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\My Final Project.csproj",
         "projectName": "My Final Project",
-        "projectPath": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\My Final Project.csproj",
-        "packagesPath": "C:\\Users\\ADESANYA\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADESANYA\\source\\repos\\Final Project\\My Final Project\\obj\\",
+        "projectPath": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\My Final Project.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ADESANYA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +26,10 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/nlpc-pfa/_packaging/nlpc-pfa/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -59,6 +66,10 @@
             "Hangfire.MySqlStorage": {
               "target": "Package",
               "version": "[2.0.3, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -98,7 +109,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

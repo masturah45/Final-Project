@@ -48,7 +48,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<IssuesDto>> Delete(Guid id)
         {
-            var issues = await _issuesRepository.Get(id);
+            var issues = await _issuesRepository.Get<Issue>(id);
             if (issues == null) return new BaseResponse<IssuesDto>
             {
                 Message = "Issue Not Found",
@@ -84,7 +84,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<IssuesDto>> GetIssues(Guid id)
         {
-            var issues = await _issuesRepository.Get(id);
+            var issues = await _issuesRepository.Get<Issue>(id);
             if (issues == null) return new BaseResponse<IssuesDto>
             {
                 Message = "Issue Not Found",
@@ -106,7 +106,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<IssuesDto>> Update(Guid id, UpdateIssuesRequestModel model)
         {
-            var issue = await _issuesRepository.Get(id);
+            var issue = await _issuesRepository.Get<Issue>(id);
             if (issue == null) return new BaseResponse<IssuesDto>
             {
                 Message = "issue not found",

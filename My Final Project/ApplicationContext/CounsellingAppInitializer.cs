@@ -18,7 +18,7 @@ public static class CounsellingAppInitializer
        // var userId = Guid.NewGuid();
         var user = new User()
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.NewGuid().ToString(),
             FirstName = "Adesanya",
             LastName = "Masturah",
             Password = "dolapo345",
@@ -37,7 +37,7 @@ public static class CounsellingAppInitializer
             new UserRole()
             {
                 Id = Guid.NewGuid(),
-                UserId = user.Id,
+                UserId = Guid.Parse(user.Id),
                 RoleId = role.Id,
                 DateCreated = DateTime.Now,
                 Role = role,
@@ -52,7 +52,7 @@ public static class CounsellingAppInitializer
             IsDeleted = false,
             DateCreated = DateTime.Now,
             DateUpdated = DateTime.Now,
-            UserId = user.Id,
+            UserId =  Guid.Parse(user.Id).ToString(),
             User = user,
         };
 

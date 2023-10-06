@@ -1,4 +1,5 @@
-﻿using My_Final_Project.Implementations.Repositories;
+﻿using Microsoft.AspNetCore.Identity;
+using My_Final_Project.Implementations.Repositories;
 using My_Final_Project.Interfaces.IRepositories;
 using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
@@ -13,13 +14,14 @@ namespace My_Final_Project.Implementations.Services
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
         private readonly INotificationMessage _notificationMessage;
-
-        public ClientService(IClientRepository clientRepository, IUserRepository userRepository, IRoleRepository roleRepository, INotificationMessage notificationMessage)
+        private readonly UserManager<User> _userManager;
+        public ClientService(IClientRepository clientRepository, IUserRepository userRepository, IRoleRepository roleRepository, INotificationMessage notificationMessage, UserManager<User> userManager)
         {
             _clientRepository = clientRepository;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
             _notificationMessage = notificationMessage;
+            _userManager = userManager;
         }
 
         public async Task<BaseResponse<ClientDto>> Create(CreateClientRequestModel model)
@@ -40,7 +42,7 @@ namespace My_Final_Project.Implementations.Services
                 Status = false,
             };
 
-            var role = await _roleRepository.Get(a => a.Name == "Client");
+            var role = await _roleRepository.Get<Role>(a => a.Name == "Client");
 
             var user = new User
             {
@@ -61,11 +63,11 @@ namespace My_Final_Project.Implementations.Services
                 User = user,
             };
             user.UserRoles.Add(userRole);
-            await _userRepository.Add(user);
+            await _userManager.CreateAsync(user);
             var client = new Client
             {
                 User = user,
-                UserId = userRole.UserId,
+                UserId = userRole.UserId.ToString(),
                 //UserId = Guid.NewGuid(),
                 State = model.State,
                 DateOfBirth = model.DateOfBirth,
@@ -91,7 +93,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<ClientDto>> Delete(Guid id)
         {
-            var client = await _clientRepository.Get(id);
+            var client = await _clientRepository.Get<Client>(id);
             if (client == null) return new BaseResponse<ClientDto>
             {
                 Message = "Client Not Found",

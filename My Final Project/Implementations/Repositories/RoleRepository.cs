@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Implementations.Repositories
 {
-    public class RoleRepository : BaseRepository<Role>, IRoleRepository
+    public class RoleRepository : BaseRepository, IRoleRepository
     {
         public RoleRepository(ApplicationDbContext context)
         {

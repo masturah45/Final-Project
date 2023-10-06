@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Interfaces.IRepositories
 {
-    public interface IClientRepository : IBaseRepository<Client>
+    public interface IClientRepository : IBaseRepository
     {
         Task<Client> GetClient(Guid id);
         Task<Client> GetClientByIdAsync(Guid id);

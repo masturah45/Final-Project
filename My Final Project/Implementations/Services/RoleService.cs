@@ -18,7 +18,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<RoleDto>> Create(CreateRoleRequestModel model)
         {
-            var roleExist = await _roleRepository.Get(b => b.Name == model.Name);
+            var roleExist = await _roleRepository.Get<Role>(b => b.Name == model.Name);
             if (roleExist != null) return new BaseResponse<RoleDto>
             {
                 Message = "Role already exist",
@@ -50,7 +50,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<RoleDto>> Delete(Guid id)
         {
-            var role = await _roleRepository.Get(id);
+            var role = await _roleRepository.Get<Role>(id);
             if (role == null) return new BaseResponse<RoleDto>
             {
                 Message = "Role Not Found",
@@ -68,7 +68,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<RoleDto>> GetRole(Guid id)
         {
-            var role = await _roleRepository.Get(id);
+            var role = await _roleRepository.Get<Role>(id);
             if (role == null) return new BaseResponse<RoleDto>
             {
                 Message = "Role Not Found",
@@ -97,7 +97,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<IEnumerable<RoleDto>>> GetAllRole()
         {
-            var roles = await _roleRepository.GetAll();
+            var roles = await _roleRepository.GetAll<Role>();
             var listOfRoles = roles.ToList().Select(b => new RoleDto
             {
                 Id = Guid.NewGuid(),
@@ -142,7 +142,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<RoleDto>> Update(Guid id, UpdateRoleRequestModel model)
         {
-            var role = await _roleRepository.Get(id);
+            var role = await _roleRepository.Get<Role>(id);
             if (role == null) return new BaseResponse<RoleDto>
             {
                 Message = "role not found",

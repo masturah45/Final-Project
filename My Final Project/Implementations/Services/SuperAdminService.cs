@@ -1,4 +1,5 @@
-﻿using My_Final_Project.Interfaces.IRepositories;
+﻿using Microsoft.AspNetCore.Identity;
+using My_Final_Project.Interfaces.IRepositories;
 using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
 using My_Final_Project.Models.Entities;
@@ -10,12 +11,13 @@ namespace My_Final_Project.Implementations.Services
         private readonly ISuperAdminRepository _superadminRepository;
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
-
-        public SuperAdminService(ISuperAdminRepository superadminRepository, IUserRepository userRepository, IRoleRepository roleRepository )
+        private readonly UserManager<User> _userManager;
+        public SuperAdminService(ISuperAdminRepository superadminRepository, IUserRepository userRepository, IRoleRepository roleRepository, UserManager<User> userManager)
         {
             _superadminRepository = superadminRepository;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
+            _userManager = userManager;
         }
 
         public async Task<BaseResponse<SuperAdminDto>> Create(CreateSuperAdminRequestModel model)
@@ -27,7 +29,7 @@ namespace My_Final_Project.Implementations.Services
                 Status = false,
             };
 
-            var role = await _roleRepository.Get(b => b.Name == "SuperAdmin");
+            var role = await _roleRepository.Get<Role>(b => b.Name == "SuperAdmin");
 
             var user = new User
             {
@@ -48,12 +50,12 @@ namespace My_Final_Project.Implementations.Services
                 User = user,
             };
             user.UserRoles.Add(userRole);
-            await _userRepository.Add(user);
+            await _userManager.CreateAsync(user);
 
             var superAdmin = new SuperAdmin
             {
                 User = user,
-                UserId = Guid.NewGuid(),
+                UserId = Guid.NewGuid().ToString(),
             };
 
             await _superadminRepository.Add(superAdmin);
@@ -91,7 +93,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<IEnumerable<SuperAdminDto>> GetAllSuperAdmin()
         {
-            var superadmins = await _superadminRepository.GetAll();
+            var superadmins = await _superadminRepository.GetAll<SuperAdmin>();
             var listOfSuperAdmins = superadmins.Select(a => new SuperAdminDto
             {
                 Id = a.Id,

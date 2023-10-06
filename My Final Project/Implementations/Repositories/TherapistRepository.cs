@@ -7,9 +7,9 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Implementations.Repositories
 {
-    public class TherapistRepository : BaseRepository<Therapist>, ITherapistRepository
+    public class TherapistRepository :BaseRepository, ITherapistRepository
     {
-
+        private readonly ApplicationDbContext _context;
         public TherapistRepository(ApplicationDbContext context)
         {
             _context = context;

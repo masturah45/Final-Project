@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Interfaces.IRepositories
 {
-    public interface IRoleRepository : IBaseRepository<Role>
+    public interface IRoleRepository : IBaseRepository
     {
         Task<Role> GetRole(Guid id);
         Task<Role> GetRole(Expression<Func<Role, bool>> expression);

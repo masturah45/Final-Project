@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Implementations.Repositories
 {
-    public class IssuesRepository : BaseRepository<Issue>, IIssuesRepository
+    public class IssuesRepository : BaseRepository, IIssuesRepository
     {
         public IssuesRepository(ApplicationDbContext context)
         {

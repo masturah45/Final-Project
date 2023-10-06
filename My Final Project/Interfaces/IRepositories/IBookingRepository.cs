@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Interfaces.IRepositories
 {
-    public interface IBookingRepository : IBaseRepository<Booking>
+    public interface IBookingRepository : IBaseRepository
     {
         Task<Booking> GetBooking(Guid TherapistId);
         Task<Booking> CancelBooking(Guid therapistId);

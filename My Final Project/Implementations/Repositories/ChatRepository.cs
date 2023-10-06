@@ -5,7 +5,7 @@ using My_Final_Project.Models.Entities;
 
 namespace My_Final_Project.Implementations.Repositories
 {
-    public class ChatRepository : BaseRepository<Chat>, IChatRepository
+    public class ChatRepository : BaseRepository, IChatRepository
     {
         public ChatRepository(ApplicationDbContext context)
         {

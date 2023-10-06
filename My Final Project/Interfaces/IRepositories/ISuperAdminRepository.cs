@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Interfaces.IRepositories
 {
-    public interface ISuperAdminRepository : IBaseRepository<SuperAdmin>
+    public interface ISuperAdminRepository : IBaseRepository
     {
         Task<SuperAdmin> GetSuperAdmin(Guid id);
         Task<SuperAdmin> GetSuperAdmin(Expression<Func<SuperAdmin, bool>> expression);

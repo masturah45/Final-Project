@@ -48,7 +48,7 @@ namespace My_Final_Project.Implementations.Services
 
             var bookingExist = await _bookingRepository.GetBooking(b => b.AppointmentDateTime == model.AppointmentDateTime);
             //var therapistExist = await _therapistRepository.Get(b => b.RegNo ==  model.TherapistName);
-            var clientExist = await _clientRepository.Get(u => u.UserId == userId);
+            var clientExist = await _clientRepository.Get<Client>(u => u.UserId == userId.ToString());
             if (clientExist == null) return new BaseResponse<BookingDto>
             {
                 Message = "Client does not exist",

@@ -50,7 +50,7 @@ namespace My_Final_Project.Implementations.Services
                 RecieverId = recieverId
             };
 
-            await _chatRepository.Add(chat);
+            await _chatRepository.Add<Chat>(chat);
             return new BaseResponse<ChatDto>
             {
                 Message = "Message Successfully Sent",

@@ -2,6 +2,7 @@
 using My_Final_Project.Interfaces.IRepositories;
 using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
+using My_Final_Project.Models.Entities;
 
 namespace My_Final_Project.Implementations.Services
 {
@@ -26,7 +27,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<TherapistIssuesDto>> GetTherapistIssues(Guid id)
         {
-            var therapistIssues = await _therapistissuesRepository.Get(id);
+            var therapistIssues = await _therapistissuesRepository.Get<TherapistIssue>(id);
             if (therapistIssues == null) return new BaseResponse<TherapistIssuesDto>
             {
                 Message = "Issue Not Found",

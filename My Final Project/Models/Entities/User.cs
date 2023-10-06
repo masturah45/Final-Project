@@ -1,4 +1,5 @@
-﻿using My_Final_Project.Models.Enum;
+﻿using Microsoft.AspNetCore.Identity;
+using My_Final_Project.Models.Enum;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
@@ -23,5 +24,8 @@ namespace My_Final_Project.Models.Entities
         [Required(ErrorMessage = "Email is required.")]
         public string Email { get; set; }
         public IList<UserRole> UserRoles { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime DateUpdated { get; set; }
     }
 }

@@ -3,16 +3,16 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Interfaces.IRepositories
 {
-    public interface IBaseRepository<T> where T : BaseEntity, new()
+    public interface IBaseRepository
     {
-        Task<T> Add(T entity);
-        Task<T> Update(T entity);
-        void Delete(T entity);
-        Task<bool> save();
-        Task<T> Get(Guid id);
-        Task<T> Get(Expression<Func<T, bool>> expression);
-        Task<IEnumerable<T>> GetAll();
-        IQueryable<T> QueryWhere(Expression<Func<T, bool>> expression);
+        Task<T> Add<T>(T entity) where T : BaseEntity;
+        Task<T> Update<T>(T entity) where T : BaseEntity;
+        void Delete<T>(T entity) where T : BaseEntity;
+        Task<bool> save() ;
+        Task<T> Get<T>(Guid id) where T : BaseEntity;
+        Task<T> Get<T>(Expression<Func<T, bool>> expression) where T : BaseEntity;
+        Task<IEnumerable<T>> GetAll<T>() where T : BaseEntity;
+        IQueryable<T> QueryWhere<T>(Expression<Func<T, bool>> expression) where T : BaseEntity;
 
 
     }

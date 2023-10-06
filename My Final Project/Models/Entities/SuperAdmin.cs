@@ -1,8 +1,11 @@
-﻿namespace My_Final_Project.Models.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace My_Final_Project.Models.Entities
 {
     public class SuperAdmin : BaseEntity
     {
         public User User { get; set; }
-        public Guid UserId { get; set; }
+        [ForeignKey("UserId")]
+        public string UserId { get; set; }
     }
 }

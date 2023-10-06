@@ -2,7 +2,7 @@
 
 namespace My_Final_Project.Interfaces.IRepositories
 {
-    public interface IChatRepository : IBaseRepository<Chat>
+    public interface IChatRepository : IBaseRepository
     { 
         Task<List<Chat>> GetAllUnSeenChat(Guid therapistId);
         Task<List<Chat>> GetAllUnSeenChat(Guid clientId, Guid therapistId);

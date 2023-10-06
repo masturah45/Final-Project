@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Implementations.Repositories
 {
-    public class ClientRepository : BaseRepository<Client> , IClientRepository
+    public class ClientRepository : BaseRepository , IClientRepository
     {
         public ClientRepository(ApplicationDbContext context)
         {
@@ -34,7 +34,7 @@ namespace My_Final_Project.Implementations.Repositories
         }
          public async Task<Client> GetClientByIdAsync(Guid id)
         {
-            return await _context.Clients.Include(a => a.User).Where(x => !x.IsDeleted).FirstOrDefaultAsync(a => a.UserId == id);
+            return await _context.Clients.Include(a => a.User).Where(x => !x.IsDeleted).FirstOrDefaultAsync(a => a.UserId == id.ToString());
         }
 
         public async Task<Client> GetClient(Expression<Func<Client, bool>> expression)

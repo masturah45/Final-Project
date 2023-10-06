@@ -7,7 +7,7 @@ using System.Threading.Channels;
 
 namespace My_Final_Project.Implementations.Repositories
 {
-    public class BookingRepository : BaseRepository<Booking>, IBookingRepository
+    public class BookingRepository : BaseRepository, IBookingRepository
     {
         public BookingRepository(ApplicationDbContext context)
         {

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace My_Final_Project.Implementations.Repositories
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository, IUserRepository
     {
         public UserRepository(ApplicationDbContext context)
         {
@@ -20,7 +20,7 @@ namespace My_Final_Project.Implementations.Repositories
                 .ToListAsync();
         }
 
-        public async Task<User> GetUser(Guid id)
+        public async Task<User> GetUser(string id)
         {
             return await _context.Users
                 .Include(c => c.UserRoles)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using My_Final_Project.FileManager;
 using My_Final_Project.Implementations.Repositories;
 using My_Final_Project.Interfaces.IRepositories;
@@ -17,15 +18,16 @@ namespace My_Final_Project.Implementations.Services
         private readonly IFileManager _fileManager;
         private readonly IIssuesRepository _issuesRepository;
         private readonly INotificationMessage _notificationMessage;
-
-        public TherapistService(ITherapistRepository therapistRepository, IUserRepository userRepository, IRoleRepository roleRepository, IFileManager fileManager, IIssuesRepository issuesRepository, INotificationMessage notificationMessage)
+        private readonly UserManager<User> _userManager;
+        public TherapistService(ITherapistRepository therapistRepository, IUserRepository userRepository, IRoleRepository roleRepository, IFileManager fileManager, IIssuesRepository issuesRepository, INotificationMessage notificationMessage, UserManager<User> userManager)
         {
             _therapistRepository = therapistRepository;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
             _fileManager = fileManager;
             _issuesRepository = issuesRepository;
-            _notificationMessage = notificationMessage;     
+            _notificationMessage = notificationMessage;  
+            _userManager = userManager;
         }
 
         public async Task<BaseResponse<TherapistDto>> Create(CreateTherapistRequestModel model)
@@ -39,11 +41,11 @@ namespace My_Final_Project.Implementations.Services
                 Message = "User already exist",
                 Status = false,
             };
-            var role = await _roleRepository.Get(b => b.Name == "Therapist");
+            var role = await _roleRepository.Get<Role>(b => b.Name == "Therapist");
 
             var user = new User
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
@@ -60,7 +62,7 @@ namespace My_Final_Project.Implementations.Services
             var userRole = new UserRole
             {
                 Id = Guid.NewGuid(),
-                UserId = user.Id,
+                UserId = Guid.Parse(user.Id),
                 RoleId = role.Id, 
                 Role = role,
                 
@@ -84,7 +86,7 @@ namespace My_Final_Project.Implementations.Services
             };
             foreach (var item in model.IssueIds)
             {
-                var issue = await _issuesRepository.Get(item);
+                var issue = await _issuesRepository.Get<Issue>(item);
                 var therapistIssue = new TherapistIssue
                 {
                     Id = Guid.NewGuid(),
@@ -96,7 +98,7 @@ namespace My_Final_Project.Implementations.Services
             }
             user.UserRoles.Add(userRole);
             user.Therapist = therapist;
-            await _userRepository.Add(user);
+            await _userManager.CreateAsync(user);
 
 
             return new BaseResponse<TherapistDto>
@@ -115,7 +117,7 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<TherapistDto>> Delete(Guid id)
         {
-            var therapist = await _therapistRepository.Get(id);
+            var therapist = await _therapistRepository.Get<Therapist>(id);
             if (therapist == null) return new BaseResponse<TherapistDto>
             {
                 Message = "Therapist Not Found",
