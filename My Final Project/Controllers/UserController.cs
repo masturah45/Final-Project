@@ -60,7 +60,7 @@ namespace My_Final_Project.Controllers
                 };
                 foreach (var item in user.Data.Roles)
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, item.Name));
+                    claims.Add(new Claim("role", item.Name));
                 }
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

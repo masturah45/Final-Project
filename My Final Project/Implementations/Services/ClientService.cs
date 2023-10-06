@@ -85,7 +85,6 @@ namespace My_Final_Project.Implementations.Services
                     FirstName = client.User.FirstName,
                     LastName = client.User.LastName,
                     Email = client.User.Email,
-                    Password = client.User.Password,
                     Gender = client.User.Gender,    
                 }
             };

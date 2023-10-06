@@ -77,7 +77,7 @@ internal class Program
         .UseMemoryStorage());
         builder.Services.AddHangfireServer();
 
-
+        builder.Services.AddSession();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

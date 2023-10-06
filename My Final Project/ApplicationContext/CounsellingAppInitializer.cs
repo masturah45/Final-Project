@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using My_Final_Project.Models.Entities;
 
 namespace My_Final_Project.ApplicationContext;
@@ -21,7 +22,6 @@ public static class CounsellingAppInitializer
             Id = Guid.NewGuid().ToString(),
             FirstName = "Adesanya",
             LastName = "Masturah",
-            Password = "dolapo345",
             Email = "masturahadesanya@gmail.com",
             PhoneNumber = "09051643452",
             IsDeleted = false,
@@ -63,11 +63,12 @@ public static class CounsellingAppInitializer
         using(var serviceScope = applicationBuilder.ApplicationServices.CreateAsyncScope())
         {
             var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+            var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
+            await userManager.CreateAsync(user, "dolapo345");
             await context.Database.MigrateAsync();
             if(!context.Roles.Any())
             {
                 await context.Roles.AddAsync(role);
-                await context.Users.AddAsync(user);
                 await context.UserRoles.AddRangeAsync(userRole);
                 await context.SuperAdmins.AddRangeAsync(superAdmin);
                 await context.SaveChangesAsync();
