@@ -1,9 +1,22 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @using My_Final_Project.Models.Entities;
-@inject UserManager<User> UserManager
+@using System.Security.Claims;
 @{
-    var claims = User.Claims;
-    var role = @claims.FirstOrDefault(c => c.Type == "role")?.Value;
+    var roles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+    if (roles.Any())
+    {
+        <p>Roles:</p>
+        <ul>
+            @foreach (var role in roles)
+            {
+                <li>@role</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No roles found.</p>
+    }
 }
 <!DOCTYPE html>
 
@@ -128,6 +141,55 @@
                 <div class="menu-inner-shadow"></div>
 
                 <ul class="menu-inner py-1">
+                    @if ("" == "SuperAdmin")
+                    {
+                        <li class="menu-item active">
+                            <a href="index.html" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <div data-i18n="Analytics">Dashboard</div>
+                            </a>
+                        </li>
+
+
+
+
+
+                        <ul style="display: flex; flex-direction: column; gap: 10px;">
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Therapist" asp-action="GetAllTherapist">All Therapist</a>
+                            </li>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="SuperAdmin" asp-action="Profile">View Profile</a>
+                            </li>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="GetAll">All Client</a>
+                            </li>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Issues" asp-action="Create">Create An Issue</a>
+                            </li>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Issues" asp-action="GetAll">All Issues</a>
+                            </li>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Therapist" asp-action="ViewUnApprovedTherapist">UnApproved Therapist</a>
+                            </li>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Therapist" asp-action="ViewApprovedTherapist">Approved Therapist</a>
+                            </li>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Therapist" asp-action="ViewRejectedTherapist">Rejected Therapist</a>
+                            </li>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Therapist" asp-action="GetAll">All Therapists</a>
+                            </li>
+                        </ul>
+
+                        <ul>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Sign Out</a>
+                            </li>
+                        </ul>
+                    }
                     <!-- Dashboard -->
                     <li class="menu-item active">
                         <a href="index.html" class="menu-link">

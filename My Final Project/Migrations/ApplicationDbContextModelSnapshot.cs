@@ -558,17 +558,15 @@ namespace My_Final_Project.Migrations
                     b.Property<Guid>("RoleId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
                 });
@@ -724,7 +722,9 @@ namespace My_Final_Project.Migrations
 
                     b.HasOne("My_Final_Project.Models.Entities.User", "User")
                         .WithMany("UserRoles")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Role");
 

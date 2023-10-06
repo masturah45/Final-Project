@@ -22,6 +22,10 @@ namespace My_Final_Project.Controllers
         {
             return View();
         }
+         public IActionResult DashBoard()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

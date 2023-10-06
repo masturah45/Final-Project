@@ -57,7 +57,7 @@ namespace My_Final_Project.Implementations.Services
             user.UserRoles.Add(new UserRole
             {
                 RoleId = Guid.NewGuid(),
-                UserId = Guid.NewGuid()
+                UserId = user.Id
             });
 
             return new BaseResponse<UserDto>

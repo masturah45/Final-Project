@@ -62,7 +62,7 @@ namespace My_Final_Project.Implementations.Services
             var userRole = new UserRole
             {
                 Id = Guid.NewGuid(),
-                UserId = Guid.Parse(user.Id),
+                UserId = user.Id,
                 RoleId = role.Id, 
                 Role = role,
                 

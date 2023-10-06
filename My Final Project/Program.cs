@@ -51,7 +51,11 @@ internal class Program
         builder.Services.AddScoped<IChatService, ChatService>();
 
         builder.Services.AddScoped<IFileManager, FileManager>();
-        builder.Services.AddIdentity<User, IdentityRole>()
+        builder.Services.AddIdentity<User, IdentityRole>(options =>
+        {
+            options.Password.RequiredLength = 9; // Password length requirements
+                                                 // Configure other password requirements here
+        })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
         builder.Services.AddScoped<INotificationMessage, NotificationMessage>();
@@ -60,8 +64,9 @@ internal class Program
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(config =>
         {
-            config.LoginPath = "/Home/Index";
+            config.LoginPath = "/User/Login";
             config.LogoutPath = "/Home/Index";
+            config.ExpireTimeSpan = TimeSpan.FromHours(1);
             config.Cookie.Name = "MyFinalProject";
         });
 
@@ -82,7 +87,6 @@ internal class Program
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
-
         _ = app.Seed();
         app.UseHttpsRedirection();
         app.UseStaticFiles();

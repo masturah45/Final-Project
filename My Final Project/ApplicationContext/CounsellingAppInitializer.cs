@@ -28,6 +28,8 @@ public static class CounsellingAppInitializer
             DateCreated = DateTime.Now,
             DateUpdated = DateTime.Now,
             Gender = Models.Enum.Gender.Female,
+            UserName = "masturahadesanya@gmail.com"
+            
             //SuperAdmin = superAdmin,
             //UserRoles = userRole,
         };
@@ -37,7 +39,7 @@ public static class CounsellingAppInitializer
             new UserRole()
             {
                 Id = Guid.NewGuid(),
-                UserId = Guid.Parse(user.Id),
+                UserId = user.Id,
                 RoleId = role.Id,
                 DateCreated = DateTime.Now,
                 Role = role,

@@ -70,13 +70,7 @@ namespace My_Final_Project.Controllers
                 TempData["Success"] = "Successfully LogIn";
                 if (user.Status == true)
                 {
-                    if (user.Data.Roles.Select(r => r.Name).Contains("SuperAdmin"))
-                        return RedirectToAction("SuperAdminBoard", "User");
-
-                    else if (user.Data.Roles.Select(r => r.Name).Contains("Client"))
-                        return RedirectToAction("ClientBoard", "User");
-                    else if (user.Data.Roles.Select(r => r.Name).Contains("Therapist"))
-                        return RedirectToAction("TherapistBoard", "User");
+                    return RedirectToAction("DashBoard", "Home");
                 }
             }
             ViewBag.error = "Invalid Email or password entered";
