@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ce/RcRalp9/xw5Uat9zYE2C4s4oEc5doYfUXiZCOmGo=",
+  "Hash": "Wf1HRqrs2Xxut2XT8Y6kUqPTgfKr3uh2lir0k0RyChs=",
   "Source": "My Final Project",
   "BasePath": "_content/My Final Project",
   "Mode": "Default",
@@ -3791,6 +3791,23 @@
       "OriginalItemSpec": "wwwroot\\Documents\\2f1033f1-image27.webp"
     },
     {
+      "Identity": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\wwwroot\\Documents\\3122fce6-Screenshot 2023-09-26 111048.png",
+      "SourceId": "My Final Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\wwwroot\\",
+      "BasePath": "_content/My Final Project",
+      "RelativePath": "Documents/3122fce6-Screenshot 2023-09-26 111048.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\3122fce6-Screenshot 2023-09-26 111048.png"
+    },
+    {
       "Identity": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\wwwroot\\Documents\\313644c7-IMG-20220726-WA0005.jpg",
       "SourceId": "My Final Project",
       "SourceType": "Discovered",
@@ -5610,6 +5627,23 @@
       "OriginalItemSpec": "wwwroot\\Documents\\9dd78c03-Screenshot 2023-09-26 111048.png"
     },
     {
+      "Identity": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\wwwroot\\Documents\\9dfb6921-Screenshot 2023-09-26 111048.png",
+      "SourceId": "My Final Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\wwwroot\\",
+      "BasePath": "_content/My Final Project",
+      "RelativePath": "Documents/9dfb6921-Screenshot 2023-09-26 111048.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\9dfb6921-Screenshot 2023-09-26 111048.png"
+    },
+    {
       "Identity": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\wwwroot\\Documents\\9e065d5c-Screenshot 2023-09-26 111048.png",
       "SourceId": "My Final Project",
       "SourceType": "Discovered",
@@ -6373,6 +6407,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Documents\\d811e974-image27.webp"
+    },
+    {
+      "Identity": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\wwwroot\\Documents\\d93498fd-Screenshot 2023-09-26 111048.png",
+      "SourceId": "My Final Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\wwwroot\\",
+      "BasePath": "_content/My Final Project",
+      "RelativePath": "Documents/d93498fd-Screenshot 2023-09-26 111048.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\d93498fd-Screenshot 2023-09-26 111048.png"
     },
     {
       "Identity": "C:\\Users\\USER\\source\\repos\\masturah45\\Final-Project\\My Final Project\\wwwroot\\Documents\\d96e20e1-Screenshot 2023-09-26 111048.png",
