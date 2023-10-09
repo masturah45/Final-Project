@@ -1,0 +1,33 @@
+﻿@using My_Final_Project.Models.Enum
+@model My_Final_Project.Models.DTOs.BookingDto
+<partial name="_Notification" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Unbooked</title>
+</head>
+
+
+<dl>
+    <br>
+    <br>
+    <h2><marquee direction="left">Are you sure you want to cancel these booking</marquee></h2>
+    <dt>
+        <h4>@Html.DisplayNameFor(model => model.AppointmentDateTime) :</h4>
+    </dt>
+    <dd>
+        <h4>@Html.DisplayFor(model => model.AppointmentDateTime) </h4>
+    </dd>
+    <br>
+
+    <br>
+    <br>
+</dl>
+<br>
+<br>
+
+<button class="btn btn-danger"><a asp-controller="Booking" asp-action="DeleteConfirmed" asp-route-TherapistId="@Model.TherapistId">Cancel</a></button>
+<button id="trans" style="background-color:darkblue;"><a asp-controller="Booking" asp-action="Profile">Back to the Profile</a></button>
+

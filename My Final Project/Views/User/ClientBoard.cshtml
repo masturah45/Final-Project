@@ -1,0 +1,150 @@
+﻿@model IEnumerable<My_Final_Project.Models.DTOs.TherapistDto>
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo">
+
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                    </a>
+                </div>
+
+                <div class="menu-inner-shadow"></div>
+
+                <!-- Layouts -->
+                <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <ul style="display: flex; flex-direction: column; gap: 10px;">
+                        <li class="menu-item mb-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Create">Book A Therapist</a>
+                        </li>
+                        <li class="menu-item mb-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="Profile">View Profile</a>
+                        </li>
+                        <li class="menu-item mb-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Profile">View Booking Profile</a>
+                        </li>
+                        <li class="menu-item mb-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="GetAllChats">View Chat</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="menu-item mb-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+
+                <ul class="navbar-nav flex-row align-items-center ms-auto">
+
+                    <!-- User -->
+                    <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                            <div class="avatar avatar-online">
+                                <img src="~/display/img/avatars/1.png" class="w-px-40 h-auto rounded-circle" />
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar avatar-online">
+                                                <img src="~/display/img/avatars/1.png" class="w-px-40 h-auto rounded-circle" />
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <span class="fw-semibold d-block">John Doe</span>
+                                            <small class="text-muted">Admin</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bx bx-user me-2"></i>
+                                    <span class="align-middle">My Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bx bx-cog me-2"></i>
+                                    <span class="align-middle">Settings</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="d-flex align-items-center align-middle">
+                                        <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                                        <span class="flex-grow-1 align-middle">Billing</span>
+                                        <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="auth-login-basic.html">
+                                    <i class="bx bx-power-off me-2"></i>
+                                    <span class="align-middle">Log Out</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--/ User -->
+                </ul>
+            </div>
+
+
+            <div class="row mb-5">
+                @foreach (var therapist in Model)
+                {
+                    <div class="col-md-6 col-xl-4">
+                        <div class="card mb-3">
+                            <img class="card-img-top" src="~/Documents/@therapist.ProfilePicture" alt="Card image cap" />
+                            <div class="card-body">
+                                <h5 class="card-title">@therapist.FirstName @therapist.LastName </h5>
+                                <h5 class="card-title">
+                                    @foreach (var item in therapist.TherapistIssues)
+                                    {
+                                        <span>  @item.Issue.Name ,  </span>
+                                    }
+                                </h5>
+                                <p class="card-text">
+                                    @therapist.RegNo @therapist.PhoneNumber
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">@therapist.Issues </small>
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">@therapist.Description </small>
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">@therapist.IsAvailable </small>
+                                </p>
+                                <th>
+                                    <a asp-controller="Booking" asp-action="Create" asp-route-therapistId="@therapist.Id" class="btn btn-warning"><i class="bi bi-pencil-fill"></i>Book</a>
+                                </th>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!--/ Images -->
+        </div>
+    </div>
+</div>
+<div class="content-backdrop fade"></div>

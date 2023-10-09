@@ -1,0 +1,55 @@
+﻿@using System.Security.Claims
+@model My_Final_Project.Models.DTOs.TherapistDto
+<partial name="_Notification" />
+<body style="background-color: blue; height: 100vh;">
+    <div class="content-wrapper" 
+            style=" position: absolute; 
+                    top: 20%; left: 30%; 
+                    height: 60vh; 
+                    width: 30vw; 
+                    /*box-shadow: 3px 3px  6px 6px #fff; */
+                    border: 1px solid grey;
+                    border-radius: 30px; 
+                    padding-left: 30px; 
+                    background-color: white;
+                    color: blue;
+" 
+    >
+        <!-- Content -->
+        <div>
+            @*<h2><marquee direction="right">SuperAdmin Details</marquee></h2>*@
+            <h3 align="center">Therapist Details</h3>
+            <div
+                style="width: 10vw;
+                       height: 20vh;
+                       background-color: lightgrey;
+                       border-radius: 50%;
+                       margin-left: 28%;
+                       box-shadow: 3px 3px 3px 3px grey;
+
+"    
+            >
+
+            </div>
+           <div 
+                style="margin-top: 30px;"    
+           >
+                <div>
+                    <h5>@Html.DisplayNameFor(model => model.FirstName) : @Html.DisplayFor(model => User.Identity.Name)</h5>
+                </div>
+
+                <div>
+                    <h5>@Html.DisplayNameFor(model => model.Email) : @Html.DisplayFor(model => User.FindFirst(ClaimTypes.Email).Value)</h5>
+                </div>
+
+                <div>
+                    <h5>@Html.DisplayNameFor(model => model.PhoneNumber) : @Html.DisplayFor(model => User.FindFirst(ClaimTypes.HomePhone).Value)</h5>
+            </div>
+
+           </div>
+           <a asp-controller="Therapist" asp-action="Update" asp-route-id="@User.FindFirst(ClaimTypes.GivenName).Value" class="btn btn-warning btn-lg"><i class="bi bi-pencil-fill"></i>Edit</a>
+            <div class="content-backdrop fade"></div>
+        </div>
+
+    </div>
+    </body>

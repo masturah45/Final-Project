@@ -1,0 +1,17 @@
+﻿
+@model IEnumerable<My_Final_Project.Models.DTOs.UserDto>
+
+    <body>
+        <h1></h1>
+        <ul>
+            <li>@foreach(var user in Model)
+                {
+
+                <a asp-route-id=@user.Id asp-action="Chat" >
+                    @user.LastName
+                    @user.FirstName
+                </a>
+                }
+            </li>
+        </ul>
+    </body>

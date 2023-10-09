@@ -1,0 +1,62 @@
+﻿@model My_Final_Project.Models.DTOs.BookingDto
+@{
+    ViewData["Title"] = "Update Booking";
+    Layout = null;
+}
+
+<h5>Update Booking</h5>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="vh-100" style="background-color: #2779e2;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-9">
+
+                    <div class="card" style="border-radius: 15px;">
+                        <div asp-controller="Book" asp-action="Update" style="font-size: 130%;">
+                            <form asp-action="Update">
+                                <div class="card-body">
+
+                                    <input asp-for="TherapistId" hidden />
+                                    <div>
+                                        <div>
+                                            <label asp-for="TherapistId"></label>
+                                            <input asp-for="TherapistId" hidden="form-control" />
+                                        </div>
+                                    </div>
+
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">AppointmentDateTime</h6>
+                                </div>
+                                <div class="col-md-9 pe-5">
+                                    <input type="datetime-local" class="form-control form-control-lg" asp-for="AppointmentDateTime" id="" />
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom:auto">
+                                <input type="submit" value="Update" class="btn-btn-primary" id="form-submit">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
