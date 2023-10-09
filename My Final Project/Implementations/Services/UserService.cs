@@ -87,7 +87,6 @@ namespace My_Final_Project.Implementations.Services
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
-                    Password = user.Password,
 
                     Roles = user.UserRoles.Select(a => new RoleDto
                     {
@@ -122,21 +121,9 @@ namespace My_Final_Project.Implementations.Services
 
         public async Task<BaseResponse<UserDto>> Login(LogInUserRequestModel model)
         {
-            var userlogin = await _userRepository.Get(a => a.Email == model.Email && a.Password == model.Password && a.IsDeleted == false);
+            var userlogin = await _userRepository.Get(a => a.Email == model.Email  && a.IsDeleted == false);
            
-            dynamic us = null;
-            if (userlogin.Client != null)
-            {
-                us = await _client.GetClient(a => a.UserId == userlogin.Id);
-            }
-            if (userlogin.Therapist != null)
-            {
-                us = await _theraphy.GetTherapist(a => a.UserId == userlogin.Id);
-            }
-            if (userlogin.SuperAdmin != null)
-            {
-                us = await _superAdmin.GetSuperAdmin(a => a.UserId == userlogin.Id);
-            }
+            
             if (userlogin != null)
             {
 
@@ -195,7 +182,6 @@ namespace My_Final_Project.Implementations.Services
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
-                    Password = user.Password,
 
                     Roles = user.UserRoles.Select(a => new RoleDto
                     {

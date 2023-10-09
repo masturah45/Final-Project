@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using My_Final_Project.ApplicationContext;
 using My_Final_Project.FileManager;
 using My_Final_Project.FileManagers;
+using My_Final_Project.Helper;
 using My_Final_Project.Implementations.Repositories;
 using My_Final_Project.Implementations.Services;
 using My_Final_Project.Interfaces.IRepositories;
@@ -55,7 +56,7 @@ internal class Program
         {
             options.Password.RequiredLength = 9; // Password length requirements
                                                  // Configure other password requirements here
-        })
+        }).AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
         builder.Services.AddScoped<INotificationMessage, NotificationMessage>();

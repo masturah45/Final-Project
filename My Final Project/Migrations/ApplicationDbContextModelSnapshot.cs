@@ -362,11 +362,9 @@ namespace My_Final_Project.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Certificate")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Credential")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("DateCreated")
@@ -376,7 +374,6 @@ namespace My_Final_Project.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<bool>("IsActive")
@@ -392,14 +389,12 @@ namespace My_Final_Project.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("ProfilePicture")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("RegNo")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Status")
+                    b.Property<int?>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -407,7 +402,6 @@ namespace My_Final_Project.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
@@ -503,10 +497,6 @@ namespace My_Final_Project.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");

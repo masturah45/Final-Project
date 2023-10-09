@@ -18,8 +18,6 @@ namespace My_Final_Project.Models.Entities
         public SuperAdmin SuperAdmin { get; set; }
         public Therapist Therapist { get; set; }        
         public Client Client { get; set; }
-        [Required(ErrorMessage = "Password is required.")]
-        public string Password { get; set; }
         public Gender Gender { get; set; }
         [Required(ErrorMessage = "Email is required.")]
         public string Email { get; set; }

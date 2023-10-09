@@ -5,6 +5,7 @@ using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
 using My_Final_Project.Models.Entities;
 using My_Final_Project.Models.Enum;
+using System.Text.RegularExpressions;
 
 namespace My_Final_Project.Implementations.Services
 {
@@ -23,11 +24,26 @@ namespace My_Final_Project.Implementations.Services
             _notificationMessage = notificationMessage;
             _userManager = userManager;
         }
-
+        private static bool ValidatePassword(string password)
+        {
+            Regex regex = new Regex(@"^(?=.*[A-Z])(?=.*[@#$%^&+=])(?=.{8,})");
+            return regex.IsMatch(password);
+        }
         public async Task<BaseResponse<ClientDto>> Create(CreateClientRequestModel model)
         {
-            var request = new WhatsappMessageSenderRequestModel { ReciprantNumber = model.PhoneNumber, MessageBody = "Client created successfully" };
-            await _notificationMessage.SendWhatsappMessageAsync(request);
+
+
+            bool isValid = ValidatePassword(model.Password);
+            if (!isValid)
+            {
+                return new BaseResponse<ClientDto>
+                {
+                    Message = "Password is invalid. Password must be at least 8 characters long, contain at least one capital letter, and a special character.",
+                    Status = false,
+                   
+                };
+            }
+           
             //var clientExist = await _userRepository.Get(a => a.Email == model.Email);
             //if (clientExist != null) return new BaseResponse<ClientDto>
             //{
@@ -48,10 +64,9 @@ namespace My_Final_Project.Implementations.Services
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Password = model.Password,
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
-
+                UserName = model.Email,
                 UserRoles = new List<UserRole>()
             };
 
@@ -63,19 +78,20 @@ namespace My_Final_Project.Implementations.Services
                 User = user,
             };
             user.UserRoles.Add(userRole);
-            await _userManager.CreateAsync(user);
+            await _userManager.CreateAsync(user,model.Password);
             var client = new Client
             {
                 User = user,
                 UserId = userRole.UserId.ToString(),
-                //UserId = Guid.NewGuid(),
                 State = model.State,
                 DateOfBirth = model.DateOfBirth,
                 Gender = model.Gender,
 
             };
             await _clientRepository.Add(client);
-
+            await _clientRepository.save();
+            var request = new WhatsappMessageSenderRequestModel { ReciprantNumber = model.PhoneNumber, MessageBody = "Client created successfully" };
+            await _notificationMessage.SendWhatsappMessageAsync(request);
             return new BaseResponse<ClientDto>
             {
                 Message = "Client created successfully",

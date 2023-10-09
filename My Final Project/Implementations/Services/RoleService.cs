@@ -89,7 +89,6 @@ namespace My_Final_Project.Implementations.Services
                         FirstName = v.User.FirstName,
                         LastName = v.User.LastName,
                         Email = v.User.Email,
-                        Password = v.User.Password
                     }).ToList(),
                 },
             };
@@ -108,7 +107,6 @@ namespace My_Final_Project.Implementations.Services
                     FirstName = a.User.FirstName,
                     LastName = a.User.LastName,
                     Email = a.User.Email,
-                    Password = a.User.Password
                 }).ToList(),
             });
             return new BaseResponse<IEnumerable<RoleDto>>

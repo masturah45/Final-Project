@@ -30,9 +30,9 @@ namespace My_Final_Project.Controllers
             var issue = await _issuesService.Create(model);
             if (issue.Status == true)
             {
-                return RedirectToAction("Index", "Home");
+                TempData["success"] = "Issue Created Successfully";
+                return RedirectToAction("GetAll");
             }
-            TempData["success"] = "Issue Created Successfully";
             return View();
         }
 

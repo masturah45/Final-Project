@@ -36,7 +36,6 @@ namespace My_Final_Project.Implementations.Services
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
-                Password = model.Password,
                 PhoneNumber = model.PhoneNumber,
 
                 UserRoles = new List<UserRole>()
@@ -141,7 +140,6 @@ namespace My_Final_Project.Implementations.Services
 
             superadmin.User.FirstName = model.FirstName;
             superadmin.User.LastName = model.LastName;
-            superadmin.User.Password = model.Password;
             superadmin.User.Email = model.Password;
             superadmin.User.PhoneNumber = model.PhoneNumber;
             superadmin.DateCreated = DateTime.Now;

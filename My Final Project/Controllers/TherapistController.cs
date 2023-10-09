@@ -43,14 +43,19 @@ namespace My_Final_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateTherapistRequestModel model)
         {
-                if (!ModelState.IsValid)
-                {
-                    TempData["error"] = "Therapist Created error";
+            if (!ModelState.IsValid)
+            {
+                TempData["error"] = "Therapist Created error";
                 return View(model);
-                }
-                var responde = await _therapistService.Create(model);
-                TempData["success"] = "Therapist Created Successfully";
-                return RedirectToAction("Index", "Home=");
+            }
+            var responde = await _therapistService.Create(model);
+            if (!responde.Status)
+            {
+                TempData["error"] = responde.Message;
+                return View(model);
+            }
+            TempData["success"] = "Therapist Created Successfully";
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -137,7 +142,7 @@ namespace My_Final_Project.Controllers
         public async Task<IActionResult> ViewRejectedTherapist()
         {
             var therapist = await _therapistService.ViewRejectedTherapist();
-            if(therapist.Status == true)
+            if (therapist.Status == true)
             {
                 return View(therapist.Data);
             }

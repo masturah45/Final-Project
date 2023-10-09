@@ -2,21 +2,10 @@
 @using My_Final_Project.Models.Entities;
 @using System.Security.Claims;
 @{
-    var roles = User.Claims.Where(c => c.Type == "role").Select(c => c.Value).ToList();
-    if (roles.Any())
-    {
-        <p>Roles:</p>
-        <ul>
-            @foreach (var role in roles)
-            {
-                <li>@role</li>
-            }
-        </ul>
-    }
-    else
-    {
-        <p>No roles found.</p>
-    }
+
+    var claims = User.Claims;
+    var role = @claims.FirstOrDefault(c => c.Type == "role")?.Value;
+    var x = role;
 }
 <!DOCTYPE html>
 
@@ -139,21 +128,12 @@
                 </div>
 
                 <div class="menu-inner-shadow"></div>
-
                 <ul class="menu-inner py-1">
-                    @if ("" == "SuperAdmin")
+                    @if (@role == "SuperAdmin")
                     {
-                        <li class="menu-item active">
-                            <a href="index.html" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                                <div data-i18n="Analytics">Dashboard</div>
-                            </a>
+                        <li class="menu-item mb-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="DashBoard">DashBoard</a>
                         </li>
-
-
-
-
-
                         <ul style="display: flex; flex-direction: column; gap: 10px;">
                             <li class="menu-item mb-2">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Therapist" asp-action="GetAllTherapist">All Therapist</a>
@@ -183,43 +163,39 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Therapist" asp-action="GetAll">All Therapists</a>
                             </li>
                         </ul>
-
+                    }
+                    @if (@role == "Therapist")
+                    {
                         <ul>
+                            
                             <li class="menu-item mb-2">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Sign Out</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="GetAllChats">View Chat</a>
+                            </li>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Therapist" asp-action="Profile">View Profile</a>
                             </li>
                         </ul>
                     }
-                    <!-- Dashboard -->
-                    <li class="menu-item active">
-                        <a href="index.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Dashboard</div>
-                        </a>
-                    </li>
-
-                    <!-- Layouts -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Layouts</div>
-                        </a>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">Without menu</div>
-                                </a>
+                    @if (@role == "Client")
+                    {
+                        <ul>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Create">Book A Therapist</a>
                             </li>
-                            <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
-                                    <div data-i18n="Without navbar">Without navbar</div>
-                                </a>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="Profile">View Profile</a>
                             </li>
-
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Profile">View Booking Profile</a>
+                            </li>
+                            <li class="menu-item mb-2">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="GetAllChats">View Chat</a>
+                            </li>
                         </ul>
+                    }
+                    <li class="menu-item mb-2">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Sign Out</a>
                     </li>
-
                 </ul>
             </aside>
             <!-- / Menu -->

@@ -31,9 +31,8 @@ namespace My_Final_Project.Implementations.Repositories
 
         public async Task<Role> GetRole(Expression<Func<Role, bool>> expression)
         {
-            return await _context.Roles.FirstOrDefaultAsync(expression);
+            return await _context.Roles.Include(x=>x.UserRoles).ThenInclude(x=>x.User).FirstOrDefaultAsync(expression);
         }
-
         public Role GetRoleByName(string name)
         {
             var role =_context.Roles.FirstOrDefault(x => x.Name == name);

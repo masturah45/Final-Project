@@ -7,6 +7,8 @@ using System.Security.Claims;
 using My_Final_Project.Implementations.Services;
 using My_Final_Project.Implementations.Repositories;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Identity;
+using My_Final_Project.Models.Entities;
 
 namespace My_Final_Project.Controllers
 {
@@ -15,11 +17,15 @@ namespace My_Final_Project.Controllers
         private readonly ITherapistService _therapistService;
 
         private readonly IUserService _userService;
+        private readonly UserManager<User> _manager;
+        private readonly SignInManager<User> _signInManager;
 
-        public UserController(IUserService userService, ITherapistService therapistService)
+        public UserController(IUserService userService, ITherapistService therapistService, UserManager<User> manager, SignInManager<User> signInManager)
         {
             _userService = userService;
             _therapistService = therapistService;
+            _manager = manager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -44,8 +50,8 @@ namespace My_Final_Project.Controllers
         public async Task<IActionResult> LogIn(LogInUserRequestModel model)
         {
             var user = await _userService.Login(model);
-            
-            if (user.Data != null)
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: false);
+            /*if (user.Data != null)
             {
                 var claims = new List<Claim>
                 {
@@ -72,6 +78,10 @@ namespace My_Final_Project.Controllers
                 {
                     return RedirectToAction("DashBoard", "Home");
                 }
+            }*/
+            if (result.Succeeded)
+            {
+                return  RedirectToAction("DashBoard","Home");
             }
             ViewBag.error = "Invalid Email or password entered";
             return RedirectToAction("Index", "Home");

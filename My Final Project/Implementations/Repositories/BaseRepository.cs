@@ -13,7 +13,7 @@ namespace My_Final_Project.Implementations.Repositories
         public async Task<T> Add<T>(T entity) where T : BaseEntity
         {
            await _context.Set<T>().AddAsync(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();  
             return entity;
         }
 

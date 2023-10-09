@@ -7,6 +7,7 @@ using My_Final_Project.Interfaces.IService;
 using My_Final_Project.Models.DTOs;
 using My_Final_Project.Models.Entities;
 using My_Final_Project.Models.Enum;
+using System.Text.RegularExpressions;
 
 namespace My_Final_Project.Implementations.Services
 {
@@ -29,11 +30,25 @@ namespace My_Final_Project.Implementations.Services
             _notificationMessage = notificationMessage;  
             _userManager = userManager;
         }
-
+        private static bool ValidatePassword(string password)
+        {
+            Regex regex = new Regex(@"^(?=.*[A-Z])(?=.*[@#$%^&+=])(?=.{8,})");
+            return regex.IsMatch(password);
+        }
         public async Task<BaseResponse<TherapistDto>> Create(CreateTherapistRequestModel model)
         {
-            var request = new WhatsappMessageSenderRequestModel { ReciprantNumber = model.PhoneNumber, MessageBody = "Therapist created Successfully" };
-            await _notificationMessage.SendWhatsappMessageAsync(request);
+
+            bool isValid = ValidatePassword(model.Password);
+            if (!isValid)
+            {
+                return new BaseResponse<TherapistDto>
+                {
+                    Message = "Password is invalid. Password must be at least 8 characters long, contain at least one capital letter, and a special character.",
+                    Status = false,
+
+                };
+            }
+           
 
             var checkIfExist = await _therapistRepository.CheckIfExist(model.Email);
             if (checkIfExist != null) return new BaseResponse<TherapistDto>
@@ -45,29 +60,27 @@ namespace My_Final_Project.Implementations.Services
 
             var user = new User
             {
-                Id = Guid.NewGuid().ToString(),
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
-                Password = model.Password,
                 PhoneNumber = model.PhoneNumber,
                 Gender = model.Gender,
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,
                 IsDeleted = false,
 
-                UserRoles = new List<UserRole>()
+                
             };
-
+            await _userManager.CreateAsync(user, model.Password);
             var userRole = new UserRole
             {
-                Id = Guid.NewGuid(),
                 UserId = user.Id,
                 RoleId = role.Id, 
                 Role = role,
-                
+                User = user,
             };
 
+            await _roleRepository.Add<UserRole>(userRole);
             var certificatefile = await _fileManager.UploadFileToSystem(model.Certificate);
             var credentialsfile = await _fileManager.UploadFileToSystem(model.Credential);
             var profilepicturefile = await _fileManager.UploadFileToSystem(model.ProfilePicture);   
@@ -75,7 +88,6 @@ namespace My_Final_Project.Implementations.Services
 
             var therapist = new Therapist
             {
-                Id = Guid.NewGuid(),
                 Certificate = certificatefile.Data.Name,
                 Credential = credentialsfile.Data.Name,
                 ProfilePicture = profilepicturefile.Data.Name,
@@ -83,23 +95,25 @@ namespace My_Final_Project.Implementations.Services
                 RegNo = model.RegNo,
                 Description = model.Description, 
                 UserId = user.Id, 
+                User = user
             };
+            await _therapistRepository.Add(therapist);
             foreach (var item in model.IssueIds)
             {
                 var issue = await _issuesRepository.Get<Issue>(item);
                 var therapistIssue = new TherapistIssue
                 {
-                    Id = Guid.NewGuid(),
                     Issue = issue,
-                    IssueId = item,
+                    IssueId = issue.Id,
                     TherapistId = therapist.Id,  
+                    Therapist = therapist,
                 };
-                issues.Add(therapistIssue);
+               await _therapistRepository.Add<TherapistIssue>(therapistIssue);
             }
-            user.UserRoles.Add(userRole);
+            
             user.Therapist = therapist;
-            await _userManager.CreateAsync(user);
-
+            var request = new WhatsappMessageSenderRequestModel { ReciprantNumber = model.PhoneNumber, MessageBody = "Therapist created Successfully" };
+            await _notificationMessage.SendWhatsappMessageAsync(request);
 
             return new BaseResponse<TherapistDto>
             {
@@ -158,7 +172,6 @@ namespace My_Final_Project.Implementations.Services
                     Certificate = therapist.Certificate,
                     Credential = therapist.Credential,
                     ProfilePicture = therapist.ProfilePicture,
-                    Password = therapist.User.Password,
                     Gender = therapist.User.Gender,
 
                 }
@@ -175,7 +188,6 @@ namespace My_Final_Project.Implementations.Services
                 FirstName = a.User.FirstName,
                 LastName = a.User.LastName,
                 Email = a.User.Email,
-                Password = a.User.Password,
                 RegNo = a.RegNo,
                 Certificate = a.Certificate,
                 IsAvailable = a.IsAvalaible,
@@ -201,7 +213,6 @@ namespace My_Final_Project.Implementations.Services
 
             therapist.User.FirstName = model.FirstName;
             therapist.User.LastName = model.LastName;
-            therapist.User.Password = model.Password;
             therapist.User.Email = model.Email;
             therapist.User.PhoneNumber = model.PhoneNumber;
             therapist.DateCreated = DateTime.Now;
